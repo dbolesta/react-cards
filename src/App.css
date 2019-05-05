@@ -1,3 +1,18 @@
+
+body {
+  display: flex;
+  background-color: palevioletred;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+
+
+
 .App {
   text-align: center;
 }
@@ -22,6 +37,7 @@
 .App-link {
   color: #61dafb;
 }
+
 
 @keyframes App-logo-spin {
   from {

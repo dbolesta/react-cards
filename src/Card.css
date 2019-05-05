@@ -1,0 +1,205 @@
+.card {
+   background: no-repeat center/contain url(https://picsum.photos/id/884/125/125);
+   /* background-color: blue; */
+   height: 125px;
+   width: 125px;
+   cursor: pointer;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -webkit-box-orient: vertical;
+   -webkit-box-direction: normal;
+   -ms-flex-direction: column;
+   flex-direction: column;
+   
+   position: relative;
+   border-radius: 2px;
+   border: 5px solid goldenrod;
+   box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+ }
+
+
+ /* vars for the arrows */
+ :root {
+   --arrow-color: #007bff;
+ }
+ 
+
+ .arrow-container {
+   width: 100%;
+   height: 100%;
+   box-sizing: border-box;
+   display: flex;
+ }
+ 
+ 
+
+ /* shared styles for all arrow and arrow numbers */
+ .arrow {
+   width: 0;
+   height: 0;
+   border-style: solid;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   }
+   .arrow > span {
+     position: absolute;
+     color: white;
+     font-weight: 600;
+   }
+ 
+/*
+//    Top Left
+//     __
+//    |
+*/
+
+.arrow-top-left {
+   border-width: 12px 12px 0 0;
+   border-color: var(--arrow-color) transparent transparent transparent;
+   position: absolute;
+   left: -5px;
+   top: -5px;
+ }
+   .arrow-top-left > span {
+     left: 7px;
+     top: -7px;
+   }
+
+ 
+ 
+/*
+//    Top 
+//     /\
+//    /  \
+*/
+.arrow-top {
+   border-style: solid;
+   border-width: 0 7.5px 8px 7.5px;
+   border-color: transparent transparent var(--arrow-color) transparent;
+   justify-self: center;
+   margin: 0 auto;
+   position: absolute;
+   left: 0;
+   right: 0;
+   top: -8px;
+ }
+   .arrow-top > span {
+     top: 7px;
+   }
+
+ 
+ 
+/*
+//    Top Right
+//     __
+//       |
+*/
+.arrow-top-right {
+   border-width: 12px 0 0 12px;
+   border-color: var(--arrow-color) transparent transparent transparent;
+   position: absolute;
+   right: -5px;
+   top: -5px;
+ }
+   .arrow-top-right > span {
+     right: 7px;
+     top: -7px;
+   }
+
+
+
+/*
+//    Left
+//     /
+//     \
+*/
+.arrow-left {
+   border-width: 7.5px 8px 7.5px 0px;
+   border-color: transparent var(--arrow-color) transparent transparent;
+   align-self: center;
+   position: absolute;
+   left: -8px;
+ }
+   .arrow-left > span {
+     left: 12px;
+   }
+ 
+
+
+/*
+//    Right
+//     \
+//     /
+*/
+.arrow-right {
+   border-width: 7.5px 0 7.5px 8px;
+   border-color: transparent transparent transparent var(--arrow-color);
+   align-self: center;
+   position: absolute;
+   right: -8px;
+ }
+   .arrow-right > span {
+     right: 11px;
+   }
+
+
+
+/*
+//    Bottom Left
+//    |
+//     --
+*/
+.arrow-bottom-left {
+   border-width: 0 12px 12px 0;
+   border-color: transparent transparent var(--arrow-color) transparent;
+   position: absolute;
+   left: -5px;
+   bottom: -5px;
+ }
+   .arrow-bottom-left > span {
+     left: 7px;
+     bottom: -7px;
+   }
+
+
+/*
+//   Bottom 
+//    \  /
+//     \/
+*/
+.arrow-bottom {
+   border-style: solid;
+   border-width: 8px 7.5px 0 7.5px;
+   border-color: var(--arrow-color) transparent transparent transparent;
+   justify-self: center;
+   margin: 0 auto;
+   position: absolute;
+   left: 0;
+   right: 0;
+   bottom: -8px;
+ }
+   .arrow-bottom > span {
+     bottom: 7px;
+   }
+
+
+/*
+//    Bottom Right
+//       |
+//     --
+*/
+.arrow-bottom-right {
+   border-width: 0 0 12px 12px;
+   border-color:  transparent transparent var(--arrow-color) transparent;
+   position: absolute;
+   right: -5px;
+   bottom: -5px;
+ }
+   .arrow-bottom-right > span {
+     right: 7px;
+     bottom: -7px;
+   }
