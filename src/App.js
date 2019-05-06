@@ -1,67 +1,52 @@
 import React from 'react';
 import logo from './logo.svg';
+import Card from './Card'
 import './App.css';
 import './Card.css';
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContext } from 'react-dnd'
 
 
-
-class Card extends React.Component {
+class CardHolder extends React.Component {
   render() {
 
 
+    const slots = [];
+
+    const slotStyle = {
+      border: "1px solid black",
+      padding: "10px"
+    }
+
+    for (let i = 1; i < 6; i++) {
+      slots.push(
+        <div className="cardSlot" style={slotStyle} key={i}>
+          <Card />
+        </div>
+      )
+    }
+
 
     return (
-      <div class="card">
-        <div class="arrow-container">
-          <span class="arrow arrow-top-left">
-            <span>10</span>
-          </span>
-
-          <span class="arrow arrow-top">
-            <span>9</span>
-          </span>
-
-          <span class="arrow arrow-top-right">
-            <span>8</span>
-          </span>
-
-          <span class="arrow arrow-left">
-            <span>4</span>
-          </span>
-
-          <span class="arrow arrow-right">
-            <span>4</span>
-          </span>
-
-          <span class="arrow arrow-bottom-left">
-            <span>10</span>
-          </span>
-
-          <span class="arrow arrow-bottom">
-            <span>10</span>
-          </span>
-
-          <span class="arrow arrow-bottom-right">
-            <span>4</span>
-          </span>
-
-        </div>
-
+      <div className="cardHolder">
+        {slots}
       </div>
-    )
 
+    )
   }
 }
+
 
 
 function App() {
   return (
     <div className="App">
 
-      <Card />
+      <CardHolder />
 
     </div>
   );
 }
 
-export default App;
+export default DragDropContext(HTML5Backend)(App)
+//export default App;
