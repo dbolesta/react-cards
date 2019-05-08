@@ -5,13 +5,13 @@ import { DragSource } from 'react-dnd'
 const itemSource = {
    beginDrag(props) {
       console.log("Im draggin ma");
-      return props.item;
+      return props;
    },
    endDrag(props, monitor, component) {
       if (!monitor.didDrop()) {
          return;
       }
-      return props.handleDrop(props.item.id);
+      return props.handleDrop(props.id);
    }
 }
 
@@ -24,46 +24,31 @@ function collect(connect, monitor) {
 
 class Card extends Component {
    render() {
+      const { isDragging, connectDragSource, src, key, numbers } = this.props;
 
-      const { isDragging, connectDragSource, src } = this.props;
+      // container for all arrow JSX
+      const arrows = [];
+
+      // loop through numbers object prop using Object.keys so we can get key / value
+      Object.keys(numbers).map(function (keyName, keyIndex) {
+
+         // if no number, return empty handed
+         if (numbers[keyName] === null) return;
+
+         // add the JSX using keyName for styling
+         arrows.push(
+            <span className={"arrow arrow-" + keyName}>
+               <span>{numbers[keyName]}</span>
+            </span>
+         )
+
+      })
 
       return connectDragSource(
          <div className="card">
             <div className="arrow-container">
-               <span className="arrow arrow-top-left">
-                  <span>10</span>
-               </span>
-
-               <span className="arrow arrow-top">
-                  <span>9</span>
-               </span>
-
-               <span className="arrow arrow-top-right">
-                  <span>8</span>
-               </span>
-
-               <span className="arrow arrow-left">
-                  <span>4</span>
-               </span>
-
-               <span className="arrow arrow-right">
-                  <span>4</span>
-               </span>
-
-               <span className="arrow arrow-bottom-left">
-                  <span>10</span>
-               </span>
-
-               <span className="arrow arrow-bottom">
-                  <span>10</span>
-               </span>
-
-               <span className="arrow arrow-bottom-right">
-                  <span>4</span>
-               </span>
-
+               {arrows}
             </div>
-
          </div>
       )
 
