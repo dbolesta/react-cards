@@ -18,6 +18,7 @@ const itemSource = {
 function collect(connect, monitor) {
    return {
       connectDragSource: connect.dragSource(),
+      connectDragPreview: connect.dragPreview(),
       isDragging: monitor.isDragging()
    }
 }
@@ -25,7 +26,7 @@ function collect(connect, monitor) {
 class Card extends Component {
    render() {
       const { isDragging, connectDragSource, src, key, numbers } = this.props;
-
+      const opacity = isDragging ? 0 : 1;
       // container for all arrow JSX
       const arrows = [];
 
@@ -37,7 +38,7 @@ class Card extends Component {
 
          // add the JSX using keyName for styling
          arrows.push(
-            <span className={"arrow arrow-" + keyName}>
+            <span className={"arrow arrow-" + keyName} key={keyName}>
                <span>{numbers[keyName]}</span>
             </span>
          )
@@ -45,15 +46,15 @@ class Card extends Component {
       })
 
       return connectDragSource(
-         <div className="card">
+         <div className="card" style={{ opacity }}>
             <div className="arrow-container">
                {arrows}
             </div>
-         </div>
+         </ div>
       )
 
    }
 }
 
 export default DragSource('card', itemSource, collect)(Card)
-//export default Card
+      //export default Card

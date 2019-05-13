@@ -9,7 +9,7 @@ let firstCard = {
    numbers: {
       tl: 1,
       t: 2,
-      tr: 3,
+      tr: 10,
       ml: 4,
       mr: 5,
       bl: 6,

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import Card from './Card'
+import CardHolder from './CardHolder'
 import Board from './Board';
 import './App.css';
 import './Card.css';
@@ -10,79 +11,21 @@ import allCards from './AllCards'
 
 
 
-
-class CardHolder extends React.Component {
-
-
-  deleteItem = (id) => {
-    // this.setState(prevState => {
-    //   let items = prevState.items;
-    //   const index = items.findIndex(item => item.id === id);
-
-    //   items.splice(index, 1);
-
-    //   return { items };
-    // });
-    console.log(id);
-  }
-
-
-
+class App extends Component {
   render() {
-
-
-    const slots = [];
-
-    const holderStyle = {
-      border: "1px solid black"
-    }
-
-    const slotStyle = {
-      border: "1px solid black"
-    }
-
-    for (let i = 1; i < 6; i++) {
-      slots.push(
-        <div className="cardSlot" style={slotStyle} key={i}>
-          <Card
-            id={i}
-            handleDrop={(id) =>
-              this.deleteItem(id)
-            }
-            numbers={allCards[1].numbers}
-          />
-        </div>
-      )
-    }
-
-
     return (
-      <div className="cardHolder" style={holderStyle}>
-        {slots}
-      </div>
+      <div className="App" >
+        <div className="play-area">
 
-    )
+          <CardHolder />
+          <Board />
+          <CardHolder />
+
+        </div>
+
+      </div>
+    );
   }
-}
-
-
-
-
-
-
-function App() {
-  return (
-    <div className="App">
-      <div className="play-area">
-
-        <CardHolder />
-        <Board />
-        <CardHolder />
-
-      </div>
-
-    </div>
-  );
 }
 
 export default DragDropContext(HTML5Backend)(App)
