@@ -4,7 +4,7 @@ export class ScoreBoard extends Component {
    render() {
       return (
          <div>
-            2|3
+            {this.props.score.p1}|{this.props.score.p2}
             <br />
             <br />
          </div>

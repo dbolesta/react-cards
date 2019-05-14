@@ -91,25 +91,28 @@ fetch('https://source.unsplash.com/random')
 console.log(tester);
 
 class App extends Component {
-
-  state = {
-    board: [
-      [null, null, null, null],
-      [null, null, null, null],
-      [null, null, null, null],
-      [null, null, null, null]
-    ],
-    p1hand: [
-      null, null, null, null, null
-    ],
-    p2hand: [
-      null, null, null, null, null
-    ],
-    score: {
-      p1: 0,
-      p2: 0
+  constructor(props) {
+    super(props);
+    this.state = {
+      board: [
+        [null, null, null, null],
+        [null, null, null, null],
+        [null, null, null, null],
+        [null, null, null, null]
+      ],
+      p1hand: [
+        null, null, null, null, null
+      ],
+      p2hand: [
+        null, null, null, null, null
+      ],
+      score: {
+        p1: 9,
+        p2: 123
+      }
     }
   }
+
 
   render() {
     return (
@@ -120,7 +123,9 @@ class App extends Component {
         <div className="play-area">
 
           <CardHolder player="p1" />
-          <Board />
+          <Board
+            score={this.state.score}
+          />
           <CardHolder player="p2" />
 
         </div>

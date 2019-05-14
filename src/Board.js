@@ -39,7 +39,8 @@ class Board extends Component {
          <div className="card-board-container" style={boardContainerStyle}>
 
             <div className="score-board">
-               <ScoreBoard />
+               <ScoreBoard
+                  score={this.props.score} />
             </div>
 
             <div className="card-board">

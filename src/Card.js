@@ -46,10 +46,10 @@ class Card extends Component {
       })
 
       return connectDragSource(
-         <div className="card" style={{ opacity }} title={title}>
+         <div className={"card" + " card-" + owner} style={{ opacity }} title={title}>
             <div className="arrow-container">
                {arrows}
-               <div className={"card-color " + owner + "-color"}></div>
+               <div className="card-color"></div>
             </div>
          </ div>
       )
@@ -58,4 +58,4 @@ class Card extends Component {
 }
 
 export default DragSource('card', itemSource, collect)(Card)
-      //export default Card
+//export default Card
