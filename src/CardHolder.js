@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import BoardSpace from './BoardSpace'
 import Card from './Card'
 import allCards from './AllCards' // delete this line eventually, once test card is done
-
-
+import * as utils from './utils'
 
 class CardHolder extends React.Component {
 
@@ -17,16 +16,17 @@ class CardHolder extends React.Component {
 
    render() {
 
+      const { player } = this.props;
 
       const cardSlots = [];
 
-      const holderStyle = {
-         border: "1px solid black",
-         padding: "1px"
-      }
-
 
       for (let i = 1; i < 6; i++) {
+
+         let chosenCard = allCards[utils.getRandomIntInclusive(0, allCards.length - 1)];
+
+         chosenCard.owner = player;
+
          cardSlots.push(
             <div
                className="card-slot"
@@ -38,7 +38,9 @@ class CardHolder extends React.Component {
                   handleDrop={(id) =>
                      this.deleteItem(id)
                   }
-                  numbers={allCards[0].numbers}
+                  numbers={chosenCard.numbers}
+                  title={chosenCard.name}
+                  owner={chosenCard.owner}
                />
             </div>
          )
@@ -46,10 +48,12 @@ class CardHolder extends React.Component {
 
 
       return (
-         <div className="cardHolder" style={holderStyle}>
-            {cardSlots}
+         <div className="card-holder-container">
+            <p>Player {player}</p>
+            <div className="card-holder">
+               {cardSlots}
+            </div>
          </div>
-
       )
    }
 }

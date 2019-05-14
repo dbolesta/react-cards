@@ -1,3 +1,11 @@
+/* vars for the arrows */
+:root {
+  --arrow-color: #007bff;
+  --border-color: goldenrod;
+}
+
+
+
 .card {
    background: no-repeat center/contain url(https://picsum.photos/125);
    /* background-color: blue; */
@@ -13,8 +21,7 @@
    flex-direction: column;
    
    position: relative;
-   border-radius: 2px;
-   border: 7px solid goldenrod;
+   border: 5px solid var(--border-color);
    box-sizing: border-box;
      -moz-box-sizing: border-box;
      -webkit-box-sizing: border-box;
@@ -23,11 +30,6 @@
  }
 
 
- /* vars for the arrows */
- :root {
-   --arrow-color: #007bff;
- }
- 
 
  .arrow-container {
    width: 100%;
@@ -36,6 +38,23 @@
    display: flex;
    border: 1px solid #444;
  }
+ 
+
+ /* overlay color depending on player owner */
+ .card-color{
+  width: 100%;
+  height: 100%;
+  transition: background-color 500ms ease-in-out;
+ }
+ 
+  .p1-color {
+    background-color: rgba(11, 6, 139, 0.3);
+  }
+
+  .p2-color {
+    background-color: rgba(139, 6, 11, 0.3);
+  }
+
  
  
  
@@ -63,14 +82,14 @@
 */
 
 .arrow-tl {
-   border-width: 11px 11px 0 0;
+   border-width: 9px 9px 0 0;
    border-color: var(--arrow-color) transparent transparent transparent;
    position: absolute;
-   left: -7px;
-   top: -7px;
+   left: -5px;
+   top: -5px;
  }
    .arrow-tl > span {
-     left: 9px;
+     left: 8px;
      top: -4px;
    }
 
@@ -83,17 +102,17 @@
 */
 .arrow-t {
    border-style: solid;
-   border-width: 0 7px 7px 7px;
+   border-width: 0 6px 5px 6px;
    border-color: transparent transparent var(--arrow-color) transparent;
    justify-self: center;
    margin: 0 auto;
    position: absolute;
    left: 0;
    right: 0;
-   top: -7px;
+   top: -5px;
  }
    .arrow-t > span {
-     top: 7px;
+     top: 5px;
    }
 
  
@@ -104,14 +123,14 @@
 //       |
 */
 .arrow-tr {
-   border-width: 11px 0 0 11px;
+   border-width: 9px 0 0 9px;
    border-color: var(--arrow-color) transparent transparent transparent;
    position: absolute;
-   right: -7px;
-   top: -7px;
+   right: -5px;
+   top: -5px;
  }
    .arrow-tr > span {
-     right: 9px;
+     right: 8px;
      top: -4px;
    }
 
@@ -123,14 +142,14 @@
 //     \
 */
 .arrow-ml {
-   border-width: 7px 7px 7px 0px;
+   border-width: 6px 5px 6px 0px;
    border-color: transparent var(--arrow-color) transparent transparent;
    align-self: center;
    position: absolute;
-   left: -7px;
+   left: -5px;
  }
    .arrow-ml > span {
-     left: 10px;
+     left: 8px;
    }
  
 
@@ -141,14 +160,14 @@
 //     /
 */
 .arrow-mr {
-   border-width: 7px 0 7px 7px;
+   border-width: 6px 0 6px 5px;
    border-color: transparent transparent transparent var(--arrow-color);
    align-self: center;
    position: absolute;
-   right: -7px;
+   right: -5px;
  }
    .arrow-mr > span {
-     right: 11px;
+     right: 7px;
    }
 
 
@@ -159,14 +178,14 @@
 //     --
 */
 .arrow-bl {
-   border-width: 0 11px 11px 0;
+   border-width: 0 9px 9px 0;
    border-color: transparent transparent var(--arrow-color) transparent;
    position: absolute;
-   left: -7px;
-   bottom: -7px;
+   left: -5px;
+   bottom: -5px;
  }
    .arrow-bl > span {
-     left: 9px;
+     left: 8px;
      bottom: -4px;
    }
 
@@ -178,17 +197,17 @@
 */
 .arrow-b {
    border-style: solid;
-   border-width: 7px 7px 0 7px;
+   border-width: 5px 6px 0 6px;
    border-color: var(--arrow-color) transparent transparent transparent;
    justify-self: center;
    margin: 0 auto;
    position: absolute;
    left: 0;
    right: 0;
-   bottom: -7px;
+   bottom: -5px;
  }
    .arrow-b > span {
-     bottom: 7px;
+     bottom: 5px;
    }
 
 
@@ -198,13 +217,39 @@
 //     --
 */
 .arrow-br {
-   border-width: 0 0 11px 11px;
+   border-width: 0 0 9px 9px;
    border-color:  transparent transparent var(--arrow-color) transparent;
    position: absolute;
-   right: -7px;
-   bottom: -7px;
+   right: -5px;
+   bottom: -5px;
  }
    .arrow-br > span {
-     right: 9px;
+     right: 8px;
      bottom: -4px;
    }
+
+
+
+  /* 
+    Animation testing 
+  */
+
+
+   /* animation-name: stab-tr;
+   animation-duration: 1s; */
+
+   @keyframes stab-tr {
+    0% {
+        right: -4px;
+        top: -4px;
+        animation-timing-function: ease-in;
+    }
+    15% {
+        right: -10px;
+        top: -10px;
+    }
+    100% {
+        right: -5px;
+        top: -5px;
+    }
+  }
