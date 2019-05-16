@@ -26,7 +26,7 @@ function blamBoi(x, y) {
 
 class BoardSpace extends Component {
    render() {
-      const { connectDropTarget, hovered, item, dropped, x, y } = this.props;
+      const { connectDropTarget, hovered, item, dropped, x, y, children } = this.props;
 
       const backgroundColor = hovered ? "rgba(255, 255, 255, 0.75)" : "transparent";
       if (hovered) {
@@ -38,7 +38,9 @@ class BoardSpace extends Component {
             className="card-board-space"
             data-position={x + "-" + y}
             style={{ backgroundColor }}
-         ></div>
+         >
+            {children}
+         </div>
       )
    }
 

@@ -61,34 +61,8 @@ import * as utils from './utils'
 // }
 // console.log(cardos);
 
-var tester = [];
-for (var i = 0; i < 5; i++) {
-  // fetch('https://source.unsplash.com/random')
-  //   .then(response => response.json())
-  //   .then(function (data) {
-  //     console.log(data);
-  //   });
-
-  // fetch('https://source.unsplash.com/random')
-  //   .then(function (response) {
-  //     return response.json()
-  //   })
-  //   .then(function (res) {
-  //     res.forEach(element => {
-  //       tester.push(element);
-  //     });
-  //   })
 
 
-}
-
-fetch('https://source.unsplash.com/random')
-  .then(function (response) {
-    console.log("here is fetch");
-    console.log(response.url);
-  })
-
-console.log(tester);
 
 class App extends Component {
   constructor(props) {
@@ -96,9 +70,9 @@ class App extends Component {
     this.state = {
       board: [
         [null, null, null, null],
+        [null, <p>help me out</p>, null, null],
         [null, null, null, null],
-        [null, null, null, null],
-        [null, null, null, null]
+        [null, null, <p>please!</p>, null]
       ],
       p1hand: [
         null, null, null, null, null
@@ -125,6 +99,7 @@ class App extends Component {
           <CardHolder player="p1" />
           <Board
             score={this.state.score}
+            board={this.state.board}
           />
           <CardHolder player="p2" />
 

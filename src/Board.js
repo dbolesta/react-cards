@@ -8,39 +8,63 @@ import ScoreBoard from './ScoreBoard'
 
 
 
+function renderBoardSpace(i, board) {
+   const x = i % 4
+   const y = Math.floor(i / 4)
 
+   const tester = board[x][y];
 
+   return (
+      <BoardSpace
+         x={x}
+         y={y}
+         key={i}
+         position={x + "-" + y}
+      >
+         {tester}
+      </BoardSpace>
+   )
+}
 
 class Board extends Component {
+   constructor(props) {
+      super(props);
+   }
+
+
+
    render() {
 
-      const boardSpaces = [];
+      // const boardSpaces = [];
 
-      for (var i = 1; i < 5; i++) {
-         for (var j = 1; j < 5; j++) {
-            boardSpaces.push(
-               <BoardSpace
-                  x={i}
-                  y={j}
-                  key={i + "-" + j}
-               />
-            )
-         }
+      // for (var i = 1; i < 5; i++) {
+      //    for (var j = 1; j < 5; j++) {
+      //       boardSpaces.push(
+      //          <BoardSpace
+      //             x={i}
+      //             y={j}
+      //             key={i + "-" + j}
+      //          />
+      //       )
+      //    }
+      // }
+
+      console.log("figurung out state");
+      console.log(this.props.board[1][1]);
+
+      const boardSpaces = []
+      for (let i = 0; i < 16; i++) {
+         boardSpaces.push(renderBoardSpace(i, this.props.board))
       }
 
-      const boardContainerStyle = {
-         display: 'flex',
-         flexDirection: 'column',
-         alignItems: 'center',
-         justifyContent: 'center'
-      }
 
       return (
-         <div className="card-board-container" style={boardContainerStyle}>
+         <div className="card-board-container">
 
             <div className="score-board">
                <ScoreBoard
-                  score={this.props.score} />
+                  score={this.props.score}
+               />
             </div>
 
             <div className="card-board">
@@ -48,17 +72,6 @@ class Board extends Component {
             </div>
 
 
-
-            {/* <br />
-            <p>test card</p>
-            <Card
-               id={99}
-               handleDrop={(id) =>
-                  this.deleteItem(id)
-               }
-               numbers={allCards[0].numbers}
-            />
-            <br /><br /><br /><br /><br /><br /><br /><br /> */}
          </div>
 
 

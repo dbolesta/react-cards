@@ -11,7 +11,7 @@ const itemSource = {
       if (!monitor.didDrop()) {
          return;
       }
-      return props.handleDrop(props.id);
+      return props.handleDrop(props.owner);
    }
 }
 
