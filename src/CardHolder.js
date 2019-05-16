@@ -23,7 +23,9 @@ class CardHolder extends React.Component {
 
       for (let i = 1; i < 6; i++) {
 
-         let chosenCard = allCards[utils.getRandomIntInclusive(0, allCards.length - 1)];
+         //let chosenCard = allCards[utils.getRandomIntInclusive(0, allCards.length - 1)];
+
+         let chosenCard = utils.getRandomCard();
 
          chosenCard.owner = player;
 
@@ -34,13 +36,10 @@ class CardHolder extends React.Component {
                key={i}
             >
                <Card
-                  id={i}
                   handleDrop={(id) =>
                      this.deleteItem(id)
                   }
-                  numbers={chosenCard.numbers}
-                  title={chosenCard.name}
-                  owner={chosenCard.owner}
+                  cardData={chosenCard}
                />
             </div>
          )

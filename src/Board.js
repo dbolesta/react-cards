@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import BoardSpace from './BoardSpace'
 import ScoreBoard from './ScoreBoard'
+import Card from './Card'
+import * as utils from './utils'
 
 // Only necessary for testing
 // import Card from './Card'
@@ -13,6 +15,9 @@ function renderBoardSpace(i, board) {
    const y = Math.floor(i / 4)
 
    const tester = board[x][y];
+   console.log("tester at " + x + "-" + y + " is:");
+   console.log(tester);
+
 
    return (
       <BoardSpace
@@ -21,9 +26,20 @@ function renderBoardSpace(i, board) {
          key={i}
          position={x + "-" + y}
       >
-         {tester}
+         {/* {tester} */}
+         {renderCard(x, y, board)}
       </BoardSpace>
    )
+}
+
+function renderCard(x, y, board) {
+   if (board[x][y]) {
+      return (
+         <Card
+            cardData={utils.getCardById(board[x][y])}
+         />
+      )
+   }
 }
 
 class Board extends Component {

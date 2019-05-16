@@ -25,7 +25,10 @@ function collect(connect, monitor) {
 
 class Card extends Component {
    render() {
-      const { isDragging, connectDragSource, src, key, numbers, title, owner } = this.props;
+      const { isDragging, connectDragSource } = this.props;
+      const { numbers, title, owner } = this.props.cardData;
+
+
       const opacity = isDragging ? 0 : 1;
       // container for all arrow JSX
       const arrows = [];

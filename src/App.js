@@ -10,59 +10,12 @@ import { DragDropContext } from 'react-dnd'
 import allCards from './AllCards'
 import * as utils from './utils'
 
-
-
-// helper code used to create bunch of random fake card objects with fake data
-// var faker = require('faker');
-
-// let cardos = [];
-
-// let cardId = 1;
-
-// for (var j = 0; j < 69; j++) {
-
-//   var numArray = [];
-//   // loop through all number key values of newly created card
-//   for (var i = 0; i < 8; i++) {
-//     // random, 50/50 chance of getting a number
-//     if (getRandomIntInclusive(0, 100) > 50) {
-//       // number is randomly created
-//       numArray[i] = getRandomIntInclusive(1, 10);
-//     } else {
-//       // otherwise, no number
-//       numArray[i] = null;
-//     }
-//   } // end newCard.numbers
-
-//   var photoId = getRandomIntInclusive(0, 1084);
-
-//   var color = (getRandomIntInclusive(0, 100) > 50) ? "blue" : "red";
-
-//   cardos.push({
-//     id: cardId++,
-//     owner: cardId % 2 == 0 ? "p1" : "p2",
-//     name: faker.commerce.productName(),
-//     type: faker.commerce.productMaterial(),
-//     image: `https://picsum.photos/id/${photoId}/125`,
-//     color: color,
-//     rank: 2,
-//     numbers: {
-//       tl: numArray[0],
-//       t: numArray[1],
-//       tr: numArray[2],
-//       ml: numArray[3],
-//       mr: numArray[4],
-//       bl: numArray[5],
-//       b: numArray[6],
-//       br: numArray[7]
-//     }
-//   })
-
-// }
-// console.log(cardos);
-
-
-
+console.log("Getting card id testing");
+console.log(utils.getCardById(1));
+console.log(utils.getCardById(10));
+console.log(utils.getCardById(23));
+console.log(utils.getCardById(8));
+console.log(utils.getCardById(69));
 
 class App extends Component {
   constructor(props) {
@@ -70,9 +23,9 @@ class App extends Component {
     this.state = {
       board: [
         [null, null, null, null],
-        [null, <p>help me out</p>, null, null],
+        [null, 2, null, null],
         [null, null, null, null],
-        [null, null, <p>please!</p>, null]
+        [null, null, 69, null]
       ],
       p1hand: [
         null, null, null, null, null
