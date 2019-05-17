@@ -37,6 +37,7 @@ class Board extends Component {
                handleDrop={(id) =>
                   this.deleteItem(id)
                }
+               inPlay={true}
             />
          )
       }

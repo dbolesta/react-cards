@@ -14,6 +14,13 @@ const itemSource = {
       console.log("monitor here:");
       console.log(monitor.props);
       return props.handleDrop(props.cardData.owner);
+   },
+   canDrag(props) {
+      if (props.inPlay) {
+         return false
+      } else {
+         return true
+      }
    }
 }
 

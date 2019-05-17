@@ -42,10 +42,11 @@ class CardHolder extends React.Component {
                key={i}
             >
                <Card
+                  cardData={chosenCard}
                   handleDrop={(id) =>
                      this.deleteItem(id)
                   }
-                  cardData={chosenCard}
+                  inPlay={false}
                />
             </div>
          )
