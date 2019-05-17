@@ -10,28 +10,20 @@ import { DragDropContext } from 'react-dnd'
 import allCards from './AllCards'
 import * as utils from './utils'
 
-console.log("Getting card id testing");
-console.log(utils.getCardById(1));
-console.log(utils.getCardById(10));
-console.log(utils.getCardById(23));
-console.log(utils.getCardById(8));
-console.log(utils.getCardById(69));
+
+
+const gman = utils.getUniqueRandomArray(10);
+
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: [
-        [null, null, null, null],
-        [null, 2, null, null],
-        [null, null, null, null],
-        [null, null, 69, null]
-      ],
       p1hand: [
-        null, null, null, null, null
+        gman[0], gman[1], gman[2], gman[3], gman[4]
       ],
       p2hand: [
-        null, null, null, null, null
+        gman[6], gman[7], gman[8], gman[9], gman[10]
       ],
       score: {
         p1: 9,
@@ -39,6 +31,9 @@ class App extends Component {
       }
     }
   }
+
+
+
 
 
   render() {
@@ -49,12 +44,17 @@ class App extends Component {
 
         <div className="play-area">
 
-          <CardHolder player="p1" />
+          <CardHolder
+            player="p1"
+            hand={this.state.p1hand}
+          />
           <Board
             score={this.state.score}
-            board={this.state.board}
           />
-          <CardHolder player="p2" />
+          <CardHolder
+            player="p2"
+            hand={this.state.p2hand}
+          />
 
         </div>
 

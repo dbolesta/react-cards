@@ -16,7 +16,11 @@ class CardHolder extends React.Component {
 
    render() {
 
-      const { player } = this.props;
+      const { player, hand } = this.props;
+
+
+      console.log("hand for " + player);
+      console.log(hand);
 
       const cardSlots = [];
 
@@ -25,7 +29,9 @@ class CardHolder extends React.Component {
 
          //let chosenCard = allCards[utils.getRandomIntInclusive(0, allCards.length - 1)];
 
-         let chosenCard = utils.getRandomCard();
+         //let chosenCard = utils.getRandomCard();
+
+         let chosenCard = utils.getCardById(hand[i - 1])
 
          chosenCard.owner = player;
 

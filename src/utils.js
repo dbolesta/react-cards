@@ -15,7 +15,27 @@ function getCardById(id) {
    return allCards.find(card => card.id === id);
 }
 
-export { getRandomIntInclusive, getRandomCard, getCardById };
+function getUniqueRandomArray(length) {
+   let arr = [];
+   while (arr.length < length + 1) {
+      let r = getRandomIntInclusive(0, 69);
+      if (arr.indexOf(r) === -1) arr.push(r);
+   }
+
+   return arr;
+
+   // let halfWayThough = Math.floor(arr.length / 2)
+
+   // let arrayFirstHalf = arr.slice(0, halfWayThough);
+   // let arraySecondHalf = arr.slice(halfWayThough, arr.length);
+
+
+   // return [arrayFirstHalf, arraySecondHalf];
+}
+
+
+
+export { getRandomIntInclusive, getRandomCard, getCardById, getUniqueRandomArray };
 
 
 // helper code used to create bunch of random fake card objects with fake data

@@ -9,68 +9,71 @@ import * as utils from './utils'
 // import allCards from './AllCards' 
 
 
-
-function renderBoardSpace(i, board) {
-   const x = i % 4
-   const y = Math.floor(i / 4)
-
-   const tester = board[x][y];
-   console.log("tester at " + x + "-" + y + " is:");
-   console.log(tester);
-
-
-   return (
-      <BoardSpace
-         x={x}
-         y={y}
-         key={i}
-         position={x + "-" + y}
-      >
-         {/* {tester} */}
-         {renderCard(x, y, board)}
-      </BoardSpace>
-   )
-}
-
-function renderCard(x, y, board) {
-   if (board[x][y]) {
-      return (
-         <Card
-            cardData={utils.getCardById(board[x][y])}
-         />
-      )
-   }
-}
-
 class Board extends Component {
    constructor(props) {
       super(props);
+      this.deleteItem = this.deleteItem.bind(this);
+      this.renderBoardSpace = this.renderBoardSpace.bind(this);
+      this.renderCard = this.renderCard.bind(this);
+      this.state = {
+         board: [
+            [null, null, null, null],
+            [null, 7, 8, 9],
+            [10, 11, null, null],
+            [null, null, 69, null]
+         ]
+      }
+   }
+
+   deleteItem = (id) => {
+      console.log(id);
+   }
+
+   renderCard(x, y, board) {
+      if (board[x][y]) {
+         return (
+            <Card
+               cardData={utils.getCardById(board[x][y])}
+               handleDrop={(id) =>
+                  this.deleteItem(id)
+               }
+            />
+         )
+      }
+   }
+
+   renderBoardSpace(i, board) {
+      const y = i % 4
+      const x = Math.floor(i / 4)
+
+      const tester = board[x][y];
+      console.log("tester at " + x + "-" + y + " is:");
+      console.log(tester);
+
+
+      return (
+         <BoardSpace
+            x={x}
+            y={y}
+            key={i}
+            position={x + "-" + y}
+         >
+            {/* {tester} */}
+            {this.renderCard(x, y, board)}
+         </BoardSpace>
+      )
    }
 
 
 
    render() {
 
-      // const boardSpaces = [];
-
-      // for (var i = 1; i < 5; i++) {
-      //    for (var j = 1; j < 5; j++) {
-      //       boardSpaces.push(
-      //          <BoardSpace
-      //             x={i}
-      //             y={j}
-      //             key={i + "-" + j}
-      //          />
-      //       )
-      //    }
-      // }
-
       console.log("figurung out state");
-      console.log(this.props.board[1][1]);
+      console.log(this.state.board[1][1]);
 
       const boardSpaces = []
       for (let i = 0; i < 16; i++) {
-         boardSpaces.push(renderBoardSpace(i, this.props.board))
+         boardSpaces.push(this.renderBoardSpace(i, this.state.board))
       }
 
 

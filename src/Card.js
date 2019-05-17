@@ -11,7 +11,9 @@ const itemSource = {
       if (!monitor.didDrop()) {
          return;
       }
-      return props.handleDrop(props.owner);
+      console.log("monitor here:");
+      console.log(monitor.props);
+      return props.handleDrop(props.cardData.owner);
    }
 }
 
