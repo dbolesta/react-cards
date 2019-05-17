@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { DropTarget } from 'react-dnd'
 
 const targetSource = {
-   drop(props) {
+   drop(props, monitor) {
       console.log("DROPPED ON TARGET AT POSITION" + props.x + "-" + props.y);
+      console.log(monitor)
       blamBoi(props.x, props.y);
    },
    hover(props) {

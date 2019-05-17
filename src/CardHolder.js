@@ -5,11 +5,34 @@ import allCards from './AllCards'
 import * as utils from './utils'
 
 class CardHolder extends React.Component {
+   constructor(props) {
+      super(props);
+      this.renderCard = this.renderCard.bind(this);
+   }
 
 
    // should this method be here? Or in App?
-   deleteItem = (id) => {
-      console.log(id);
+   handleDrop = (index, player) => {
+      //console.log("Should delete the " + index + " card for player " + player);
+      this.props.onPlayCard(index, player);
+   }
+
+
+   renderCard(i, hand, player) {
+      if (hand[i] === null) return;
+
+      let chosenCard = utils.getCardById(hand[i]);
+      chosenCard.owner = player;
+      return (
+         <Card
+            cardData={chosenCard}
+            onDrop={(index, p) =>
+               this.handleDrop(index, p)
+            }
+            inPlay={false}
+            index={i}
+         />
+      )
    }
 
 
@@ -19,35 +42,20 @@ class CardHolder extends React.Component {
       const { player, hand } = this.props;
 
 
-      console.log("hand for " + player);
-      console.log(hand);
+      // console.log("hand for " + player);
+      // console.log(hand);
 
       const cardSlots = [];
 
 
-      for (let i = 1; i < 6; i++) {
-
-         //let chosenCard = allCards[utils.getRandomIntInclusive(0, allCards.length - 1)];
-
-         //let chosenCard = utils.getRandomCard();
-
-         let chosenCard = utils.getCardById(hand[i - 1])
-
-         chosenCard.owner = player;
-
+      for (let i = 0; i < 5; i++) {
          cardSlots.push(
             <div
                className="card-slot"
                style={{ marginBottom: i === 5 ? '0px' : '1px' }}
                key={i}
             >
-               <Card
-                  cardData={chosenCard}
-                  handleDrop={(id) =>
-                     this.deleteItem(id)
-                  }
-                  inPlay={false}
-               />
+               {this.renderCard(i, hand, player)}
             </div>
          )
       }

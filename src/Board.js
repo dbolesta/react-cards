@@ -12,20 +12,20 @@ import * as utils from './utils'
 class Board extends Component {
    constructor(props) {
       super(props);
-      this.deleteItem = this.deleteItem.bind(this);
+      this.handleDrop = this.handleDrop.bind(this);
       this.renderBoardSpace = this.renderBoardSpace.bind(this);
       this.renderCard = this.renderCard.bind(this);
       this.state = {
          board: [
             [null, null, null, null],
-            [null, 7, 8, 9],
-            [10, 11, null, null],
-            [null, null, 69, null]
+            [null, null, null, null],
+            [null, null, null, null],
+            [null, null, null, null]
          ]
       }
    }
 
-   deleteItem = (id) => {
+   handleDrop = (id) => {
       console.log(id);
    }
 
@@ -34,8 +34,8 @@ class Board extends Component {
          return (
             <Card
                cardData={utils.getCardById(board[x][y])}
-               handleDrop={(id) =>
-                  this.deleteItem(id)
+               onDrop={(id) =>
+                  this.handleDrop(id)
                }
                inPlay={true}
             />
@@ -48,8 +48,8 @@ class Board extends Component {
       const x = Math.floor(i / 4)
 
       const tester = board[x][y];
-      console.log("tester at " + x + "-" + y + " is:");
-      console.log(tester);
+      // console.log("tester at " + x + "-" + y + " is:");
+      // console.log(tester);
 
 
       return (
@@ -69,8 +69,8 @@ class Board extends Component {
 
    render() {
 
-      console.log("figurung out state");
-      console.log(this.state.board[1][1]);
+      // console.log("figurung out state");
+      // console.log(this.state.board[1][1]);
 
       const boardSpaces = []
       for (let i = 0; i < 16; i++) {

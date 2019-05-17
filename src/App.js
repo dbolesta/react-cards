@@ -8,6 +8,7 @@ import './Card.css';
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 import allCards from './AllCards'
+import update from 'immutability-helper';
 import * as utils from './utils'
 
 
@@ -18,6 +19,7 @@ const gman = utils.getUniqueRandomArray(10);
 class App extends Component {
   constructor(props) {
     super(props);
+    this.handlePlayCard = this.handlePlayCard.bind(this);
     this.state = {
       p1hand: [
         gman[0], gman[1], gman[2], gman[3], gman[4]
@@ -33,7 +35,16 @@ class App extends Component {
   }
 
 
+  handlePlayCard(index, player) {
+    console.log("State???");
+    console.log(this.state[player + "hand"][index])
 
+    let hand = player + "hand";
+
+    this.setState({
+      [player + "hand"]: update(this.state[hand], { [index]: { $set: null } })
+    })
+  }
 
 
   render() {
@@ -47,6 +58,7 @@ class App extends Component {
           <CardHolder
             player="p1"
             hand={this.state.p1hand}
+            onPlayCard={this.handlePlayCard}
           />
           <Board
             score={this.state.score}
@@ -54,6 +66,7 @@ class App extends Component {
           <CardHolder
             player="p2"
             hand={this.state.p2hand}
+            onPlayCard={this.handlePlayCard}
           />
 
         </div>

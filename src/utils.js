@@ -18,7 +18,7 @@ function getCardById(id) {
 function getUniqueRandomArray(length) {
    let arr = [];
    while (arr.length < length + 1) {
-      let r = getRandomIntInclusive(0, 69);
+      let r = getRandomIntInclusive(1, 69);
       if (arr.indexOf(r) === -1) arr.push(r);
    }
 

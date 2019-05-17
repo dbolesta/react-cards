@@ -11,11 +11,10 @@ const itemSource = {
       if (!monitor.didDrop()) {
          return;
       }
-      console.log("monitor here:");
-      console.log(monitor.props);
-      return props.handleDrop(props.cardData.owner);
+
+      return props.onDrop(props.index, props.cardData.owner);
    },
-   canDrag(props) {
+   canDrag(props) { // used to disable dragging if card is on the Board ("inPlay")
       if (props.inPlay) {
          return false
       } else {
