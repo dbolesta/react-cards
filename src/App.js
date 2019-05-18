@@ -21,6 +21,12 @@ class App extends Component {
     super(props);
     this.handlePlayCard = this.handlePlayCard.bind(this);
     this.state = {
+      board: [
+        [null, null, null, null],
+        [null, null, null, null],
+        [null, null, null, null],
+        [null, null, null, null]
+      ],
       p1hand: [
         gman[0], gman[1], gman[2], gman[3], gman[4]
       ],
@@ -35,15 +41,23 @@ class App extends Component {
   }
 
 
-  handlePlayCard(index, player) {
+  handlePlayCard(index, player, bxy, id) {
     console.log("State???");
     console.log(this.state[player + "hand"][index])
+
+    console.log("...move card " + id + " to " + bxy.x + "-" + bxy.y + "???");
 
     let hand = player + "hand";
 
     this.setState({
-      [player + "hand"]: update(this.state[hand], { [index]: { $set: null } })
+      [player + "hand"]: update(this.state[hand], { [index]: { $set: null } }),
+      board: update(this.state.board, { [bxy.x]: { [bxy.y]: { $set: id } } })
     })
+
+    // this.setState({
+    //   board: update(this.state.board, { [bxy.x]: { [bxy.y]: { $set: id } } })
+    // })
+
   }
 
 
@@ -62,6 +76,7 @@ class App extends Component {
           />
           <Board
             score={this.state.score}
+            board={this.state.board}
           />
           <CardHolder
             player="p2"

@@ -4,8 +4,8 @@ import { DropTarget } from 'react-dnd'
 const targetSource = {
    drop(props, monitor) {
       console.log("DROPPED ON TARGET AT POSITION" + props.x + "-" + props.y);
-      console.log(monitor)
-      blamBoi(props.x, props.y);
+      return { x: props.x, y: props.y }; // this passed coords to the Card as monitor.getDropResult() in its endDrag method
+
    },
    hover(props) {
       //console.log("HOVERING");
@@ -21,9 +21,6 @@ function collect(connect, monitor) {
    }
 }
 
-function blamBoi(x, y) {
-   console.log("YA BOY GOTTA BLAM ON " + x + y);
-}
 
 class BoardSpace extends Component {
    render() {

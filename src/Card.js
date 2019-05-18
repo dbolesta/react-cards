@@ -12,7 +12,10 @@ const itemSource = {
          return;
       }
 
-      return props.onDrop(props.index, props.cardData.owner);
+      console.log("TESTING END DRAG PASS???");
+      console.log(monitor.getDropResult());
+
+      return props.onDrop(props.index, props.cardData.owner, monitor.getDropResult(), props.cardData.id);
    },
    canDrag(props) { // used to disable dragging if card is on the Board ("inPlay")
       if (props.inPlay) {

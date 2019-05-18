@@ -15,18 +15,16 @@ class Board extends Component {
       this.handleDrop = this.handleDrop.bind(this);
       this.renderBoardSpace = this.renderBoardSpace.bind(this);
       this.renderCard = this.renderCard.bind(this);
-      this.state = {
-         board: [
-            [null, null, null, null],
-            [null, null, null, null],
-            [null, null, null, null],
-            [null, null, null, null]
-         ]
-      }
+      this.handleReceive = this.handleReceive.bind(this);
+
    }
 
    handleDrop = (id) => {
       console.log(id);
+   }
+
+   handleReceive() { // dont atually need this function, can probably delete? maybe
+      console.log("handle receive!!")
    }
 
    renderCard(x, y, board) {
@@ -47,7 +45,7 @@ class Board extends Component {
       const y = i % 4
       const x = Math.floor(i / 4)
 
-      const tester = board[x][y];
+      //const tester = board[x][y];
       // console.log("tester at " + x + "-" + y + " is:");
       // console.log(tester);
 
@@ -58,6 +56,7 @@ class Board extends Component {
             y={y}
             key={i}
             position={x + "-" + y}
+            onReceive={this.handleReceive}
          >
             {/* {tester} */}
             {this.renderCard(x, y, board)}
@@ -74,7 +73,7 @@ class Board extends Component {
 
       const boardSpaces = []
       for (let i = 0; i < 16; i++) {
-         boardSpaces.push(this.renderBoardSpace(i, this.state.board))
+         boardSpaces.push(this.renderBoardSpace(i, this.props.board))
       }
 
 

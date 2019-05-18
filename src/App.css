@@ -64,7 +64,7 @@ body {
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-areas: ". . . ." ". . . ." ". . . ." ". . . .";
   width: 510px;
-  height: 500px;
+  height: 510px;
   border: 1px solid black;
   margin: 0 20px;
   box-sizing: border-box;

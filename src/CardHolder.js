@@ -12,9 +12,9 @@ class CardHolder extends React.Component {
 
 
    // should this method be here? Or in App?
-   handleDrop = (index, player) => {
+   handleDrop = (index, player, bxy, id) => {
       //console.log("Should delete the " + index + " card for player " + player);
-      this.props.onPlayCard(index, player);
+      this.props.onPlayCard(index, player, bxy, id);
    }
 
 
@@ -26,8 +26,8 @@ class CardHolder extends React.Component {
       return (
          <Card
             cardData={chosenCard}
-            onDrop={(index, p) =>
-               this.handleDrop(index, p)
+            onDrop={(index, p, bxy, id) =>
+               this.handleDrop(index, p, bxy, id)
             }
             inPlay={false}
             index={i}
