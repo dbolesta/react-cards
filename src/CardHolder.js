@@ -15,6 +15,11 @@ class CardHolder extends React.Component {
    handleDrop = (index, player, bxy, id) => {
       //console.log("Should delete the " + index + " card for player " + player);
       this.props.onPlayCard(index, player, bxy, id);
+      this.getNeighbours(bxy);
+   }
+
+   getNeighbours(bxy) {
+      console.log("Get neighbots from the position of " + bxy.x + " and " + bxy.y);
    }
 
 

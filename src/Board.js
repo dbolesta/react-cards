@@ -31,7 +31,7 @@ class Board extends Component {
       if (board[x][y]) {
          return (
             <Card
-               cardData={utils.getCardById(board[x][y])}
+               cardData={utils.getCardById(board[x][y].id)}
                onDrop={(id) =>
                   this.handleDrop(id)
                }

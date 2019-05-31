@@ -51,7 +51,7 @@ class App extends Component {
 
     this.setState({
       [player + "hand"]: update(this.state[hand], { [index]: { $set: null } }),
-      board: update(this.state.board, { [bxy.x]: { [bxy.y]: { $set: id } } })
+      board: update(this.state.board, { [bxy.x]: { [bxy.y]: { $set: { id, player } } } })
     })
 
     // this.setState({
