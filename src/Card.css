@@ -281,14 +281,48 @@ Original arrow / border colors
 }
 
 /* 
-    Animation testing 
+    Arrow Stab Animations 
   */
+.stab-tl {
+  animation: stab-tl 1s;
+}
+
+@keyframes stab-tl {
+  0% {
+    left: -4px;
+    top: -4px;
+    animation-timing-function: ease-in;
+  }
+  15% {
+    left: -10px;
+    top: -10px;
+  }
+  100% {
+    left: -5px;
+    top: -5px;
+  }
+}
+
+.stab-t {
+  animation: stab-t 1s;
+}
+
+@keyframes stab-t {
+  0% {
+    top: -4px;
+    animation-timing-function: ease-in;
+  }
+  15% {
+    top: -10px;
+  }
+  100% {
+    top: -5px;
+  }
+}
+
 .stab-tr {
   animation: stab-tr 1s;
 }
-
-/* animation-name: stab-tr;
-   animation-duration: 1s; */
 
 @keyframes stab-tr {
   0% {
@@ -303,5 +337,96 @@ Original arrow / border colors
   100% {
     right: -5px;
     top: -5px;
+  }
+}
+
+.stab-ml {
+  animation: stab-ml 1s;
+}
+
+@keyframes stab-ml {
+  0% {
+    left: -4px;
+    animation-timing-function: ease-in;
+  }
+  15% {
+    left: -10px;
+  }
+  100% {
+    left: -5px;
+  }
+}
+
+.stab-mr {
+  animation: stab-mr 1s;
+}
+
+@keyframes stab-mr {
+  0% {
+    right: -4px;
+    animation-timing-function: ease-in;
+  }
+  15% {
+    right: -10px;
+  }
+  100% {
+    right: -5px;
+  }
+}
+
+.stab-bl {
+  animation: stab-bl 1s;
+}
+
+@keyframes stab-bl {
+  0% {
+    left: -4px;
+    bottom: -4px;
+    animation-timing-function: ease-in;
+  }
+  15% {
+    left: -10px;
+    bottom: -10px;
+  }
+  100% {
+    left: -5px;
+    bottom: -5px;
+  }
+}
+
+.stab-b {
+  animation: stab-b 1s;
+}
+
+@keyframes stab-b {
+  0% {
+    bottom: -4px;
+    animation-timing-function: ease-in;
+  }
+  15% {
+    bottom: -10px;
+  }
+  100% {
+    bottom: -5px;
+  }
+}
+
+.stab-br {
+  animation: stab-br 1s;
+}
+
+@keyframes stab-br {
+  0% {
+    right: -4px;
+    bottom: -4px;
+    animation-timing-function: ease-in;
+  }
+  15% {
+    right: -10px;
+    bottom: -10px;
+  }
+  100% {
+    right: -5px;
+    bottom: -5px;
   }
 }
