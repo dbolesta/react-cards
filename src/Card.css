@@ -194,14 +194,14 @@ Original arrow / border colors
 //     /
 //     \
 */
-.arrow-ml {
+.arrow-l {
   border-width: 6px 5px 6px 0px;
   border-color: transparent var(--arrow-color) transparent transparent;
   align-self: center;
   position: absolute;
   left: -5px;
 }
-.arrow-ml-num {
+.arrow-l-num {
   left: 4px;
   align-self: center;
 }
@@ -211,14 +211,14 @@ Original arrow / border colors
 //     \
 //     /
 */
-.arrow-mr {
+.arrow-r {
   border-width: 6px 0 6px 5px;
   border-color: transparent transparent transparent var(--arrow-color);
   align-self: center;
   position: absolute;
   right: -5px;
 }
-.arrow-mr-num {
+.arrow-r-num {
   right: 2px;
   align-self: center;
 }
@@ -340,11 +340,11 @@ Original arrow / border colors
   }
 }
 
-.stab-ml {
-  animation: stab-ml 1s;
+.stab-l {
+  animation: stab-l 1s;
 }
 
-@keyframes stab-ml {
+@keyframes stab-l {
   0% {
     left: -4px;
     animation-timing-function: ease-in;
@@ -357,11 +357,11 @@ Original arrow / border colors
   }
 }
 
-.stab-mr {
-  animation: stab-mr 1s;
+.stab-r {
+  animation: stab-r 1s;
 }
 
-@keyframes stab-mr {
+@keyframes stab-r {
   0% {
     right: -4px;
     animation-timing-function: ease-in;

@@ -10,6 +10,7 @@ import { DragDropContext } from "react-dnd";
 import allCards from "./AllCards";
 import update from "immutability-helper";
 import * as utils from "./utils";
+import * as game from "./game";
 
 const randArr = utils.getUniqueRandomArray(10);
 
@@ -45,6 +46,13 @@ class App extends Component {
     };
   }
 
+  runAfterSetState(player, bxy) {
+    console.log(
+      "state has been updated, now run some code bro. Here is passed data"
+    );
+    console.log(game.adjacentSpaces(player, bxy));
+  }
+
   handlePlayCard(index, player, bxy, id) {
     console.log("State???");
     console.log(this.state[player + "hand"][index]);
@@ -55,14 +63,20 @@ class App extends Component {
 
     let hand = player + "hand";
 
-    this.setState({
-      [player + "hand"]: update(this.state[hand], {
-        [index]: { $set: null }
-      }),
-      board: update(this.state.board, {
-        [bxy.x]: { [bxy.y]: { $set: { id, player } } }
-      })
-    });
+    this.setState(
+      {
+        [player + "hand"]: update(this.state[hand], {
+          [index]: { $set: null }
+        }),
+        board: update(this.state.board, {
+          [bxy.x]: { [bxy.y]: { $set: { id, player } } }
+        })
+      },
+      this.runAfterSetState(player, bxy) // setState callback
+    );
+
+    console.log("Now we need to do battle logic.");
+    console.log(this.state.board);
 
     // this.setState({
     //   board: update(this.state.board, { [bxy.x]: { [bxy.y]: { $set: id } } })
