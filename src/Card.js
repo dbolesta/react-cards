@@ -55,7 +55,7 @@ class Card extends Component {
 
       // add the JSX using keyName for styling
       arrows.push(
-        <React.Fragment>
+        <React.Fragment key={keyName}>
           <span className={"arrow arrow-" + keyName} key={keyName}>
             {/* <span>{numbers[keyName]}</span> */}
           </span>

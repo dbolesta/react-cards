@@ -46,11 +46,16 @@ class App extends Component {
     };
   }
 
-  runAfterSetState(player, bxy) {
+  runAfterSetState(player, bxy, id) {
     console.log(
       "state has been updated, now run some code bro. Here is passed data"
     );
+    let spaces = game.adjacentSpaces(player, bxy);
     console.log(game.adjacentSpaces(player, bxy));
+    console.log("array of neighbor cards?????");
+    console.log(
+      game.getCardNodes(spaces, id, this.state.board, bxy, player)
+    );
   }
 
   handlePlayCard(index, player, bxy, id) {
@@ -72,7 +77,7 @@ class App extends Component {
           [bxy.x]: { [bxy.y]: { $set: { id, player } } }
         })
       },
-      this.runAfterSetState(player, bxy) // setState callback
+      this.runAfterSetState(player, bxy, id) // setState callback
     );
 
     console.log("Now we need to do battle logic.");
