@@ -47,24 +47,34 @@ class App extends Component {
   }
 
   runAfterSetState(player, bxy, id) {
+    let spaces = game.adjacentSpaces(bxy);
+
+    console.log("Adjacent Spaces:");
+    console.log(game.adjacentSpaces(bxy));
+
+    console.log("Enemy Neighbors:");
     console.log(
-      "state has been updated, now run some code bro. Here is passed data"
+      game.getEnemyCards(spaces, id, this.state.board, bxy, player)
     );
-    let spaces = game.adjacentSpaces(player, bxy);
-    console.log(game.adjacentSpaces(player, bxy));
-    console.log("array of neighbor cards?????");
-    console.log(
-      game.getCardNodes(spaces, id, this.state.board, bxy, player)
+
+    let enemies = game.getEnemyCards(
+      spaces,
+      id,
+      this.state.board,
+      bxy,
+      player
     );
+
+    console.log(game.determineAttacksAndCaptures(enemies, id));
   }
 
   handlePlayCard(index, player, bxy, id) {
-    console.log("State???");
-    console.log(this.state[player + "hand"][index]);
+    // console.log("State???");
+    // console.log(this.state[player + "hand"][index]);
 
-    console.log(
-      "...move card " + id + " to " + bxy.x + "-" + bxy.y + "???"
-    );
+    // console.log(
+    //   "...move card " + id + " to " + bxy.x + "-" + bxy.y + "???"
+    // );
 
     let hand = player + "hand";
 
@@ -80,8 +90,8 @@ class App extends Component {
       this.runAfterSetState(player, bxy, id) // setState callback
     );
 
-    console.log("Now we need to do battle logic.");
-    console.log(this.state.board);
+    // console.log("Now we need to do battle logic.");
+    // console.log(this.state.board);
 
     // this.setState({
     //   board: update(this.state.board, { [bxy.x]: { [bxy.y]: { $set: id } } })
