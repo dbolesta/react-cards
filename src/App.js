@@ -53,15 +53,11 @@ class App extends Component {
     console.log(game.adjacentSpaces(bxy));
 
     console.log("Enemy Neighbors:");
-    console.log(
-      game.getEnemyCards(spaces, id, this.state.board, bxy, player)
-    );
+    console.log(game.getEnemyCards(spaces, this.state.board, player));
 
     let enemies = game.getEnemyCards(
       spaces,
-      id,
       this.state.board,
-      bxy,
       player
     );
 

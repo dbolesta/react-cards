@@ -4,6 +4,9 @@ function adjacentSpaces(bxy) {
   // figure out all 8 adjacent possible squares
   // AND the direction that card would attack it from
   // (ex: the first object is top left = tl)
+
+  // attackDir is from the perspective of the MOST RECENTLY PLAYED CARD
+  // defendDir is from the perspective of the CARD THAT IS BEING ATTACKED
   var theEight = [
     {
       x: bxy.x - 1,
@@ -56,25 +59,14 @@ function adjacentSpaces(bxy) {
   return adjacentSpacesFilt;
 }
 
-// getEnemyCards takes the coordinates of the valid spaces,
-// and checks if there is a .card class living in it.
-// if so, it pushes it into array, along with the attackDir string needed
-// to keep track of the enemies relative position to the newly placed card
-function getEnemyCards(adjSpaces, id, boardState, bxy, player) {
+// getEnemyCards takes the coordinates / attackDir of the adjacent spaces,
+// and creates an array of objects containing card information, including
+// id, attackDir, and defendDir; all the info needed
+// ONLY collects enemy cards
+function getEnemyCards(adjSpaces, boardState, player) {
   let enemies = [];
 
-  //   console.log("inside getEnemyCards");
-  //   console.log("heres the stuff getting passed in");
-  //   console.log(adjSpaces);
-  //   console.log(id);
-  //   console.log(
-  //     "this one: " + boardState[adjSpaces[0].x][adjSpaces[0].y]
-  //   );
-  //   console.log(boardState[adjSpaces[0].x][adjSpaces[0].y]);
-  //   console.log(bxy);
-  //   console.log(player);
-
-  // if the given space has a .card class, collect that node in array, with the associated direction of attack
+  //
   adjSpaces.forEach(function(space) {
     let boardSpace = boardState[space.x][space.y];
     // collect card in adjacent space only if an enemy card
@@ -91,31 +83,15 @@ function getEnemyCards(adjSpaces, id, boardState, bxy, player) {
   return enemies;
 } // end getEnemyCards
 
-// determineAttacksAndCaptures takes enemy cards array and current card,
+// determineAttacksAndCaptures takes enemy cards array and id of most recently played card,
 // and creates two arrays: 1) all enemy cards where current Card and enemy card have
 // numbers pointing at each other (they will do battle), and 2) all enemy cards
 // that have no defence arrow against current cards attack arrow (will be captured)
 function determineAttacksAndCaptures(enemies, id) {
-  //   var validAttacks = enemies.filter(function(enemy) {
-  //     return (
-  //       currCardObj.numbers[enemy.attackDir] != null &&
-  //       enemy.obj.numbers[enemy.defendDir] != null
-  //     );
-  //   });
-
-  //   var validCaptures = enemies.filter(function(enemy) {
-  //     return (
-  //       currCardObj.numbers[enemy.attackDir] != null &&
-  //       enemy.obj.numbers[enemy.defendDir] === null
-  //     );
-  //   });
-
-  //   return {
-  //     attacks: validAttacks,
-  //     captures: validCaptures
-  //   };
-
+  //utilize helper function to get Object of Numbers for most recently played card
   let currCardNums = getNumsFromID(id);
+
+  // loops through enemy and player card's numbers to see if they will attack
   let validAttacks = enemies.filter(function(enemy) {
     let enemyNums = getNumsFromID(enemy.id);
     return (
@@ -124,6 +100,7 @@ function determineAttacksAndCaptures(enemies, id) {
     );
   });
 
+  // same, but check if current card is pointing at a defenseless side of enemy card
   let validCaptures = enemies.filter(function(enemy) {
     let enemyNums = getNumsFromID(enemy.id);
     return (
@@ -132,17 +109,11 @@ function determineAttacksAndCaptures(enemies, id) {
     );
   });
 
+  // return object containing each array
   return {
     attacks: validAttacks,
     captures: validCaptures
   };
-
-  console.log("Inside get attacks and captures");
-  console.log(enemies);
-  console.log(id);
-
-  console.log("VALID ATTACKERS?????");
-  console.log(validAttacks);
 } // end determineAttacksAndCaptures
 
 // HELPER FUNCTIONS
