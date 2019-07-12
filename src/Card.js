@@ -40,10 +40,27 @@ function collect(connect, monitor) {
 }
 
 class Card extends Component {
-  render() {
-    const { isDragging, connectDragSource } = this.props;
-    const { numbers, title, owner } = this.props.cardData;
+  componentWillUpdate(newProps, newState) {
+    console.log("Inside componentWillUpdate for Card");
+    console.log("New Props: ", newProps.waitingToBeSelected);
+    console.log("New State: ", newState);
+  }
 
+  render() {
+    const {
+      isDragging,
+      connectDragSource,
+      waitingToBeSelected
+    } = this.props;
+    const { numbers, title, owner, id } = this.props.cardData;
+
+    //  console.log(
+    //    "INSIDE CARD, WAITING TO BE SELECTED for card id " +
+    //      id +
+    //      " PROPS IS:"
+    //  );
+    //  //  console.log(numbers);
+    //  console.log(this.props);
     const opacity = isDragging ? 0 : 1;
     // container for all arrow JSX
     const arrows = [];
@@ -71,7 +88,11 @@ class Card extends Component {
 
     return connectDragSource(
       <div
-        className={"card" + " card-" + owner}
+        className={
+          "card card-" +
+          owner +
+          (waitingToBeSelected === true ? "card-select" : "")
+        }
         style={{ opacity }}
         title={title}
       >

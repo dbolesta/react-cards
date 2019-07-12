@@ -28,12 +28,14 @@ class Board extends Component {
   }
 
   renderCard(x, y, board) {
+    //  console.log("INSIDE RENDER CARD");
+    //  console.log(board[x][y]);
     if (board[x][y]) {
       return (
         <Card
           cardData={utils.getCardById(board[x][y].id)}
-          onDrop={id => this.handleDrop(id)}
           inPlay={true}
+          waitingToBeSelected={board[x][y].waitingToBeSelected}
         />
       );
     }
@@ -46,6 +48,10 @@ class Board extends Component {
     //const tester = board[x][y];
     // console.log("tester at " + x + "-" + y + " is:");
     // console.log(tester);
+    //console.log("Render Board Space function " + x + "-" + y);
+
+    //  console.log("Inside renderBoardSpace. Board is: ");
+    //  console.log(board);
 
     return (
       <BoardSpace
@@ -64,6 +70,10 @@ class Board extends Component {
   render() {
     // console.log("figurung out state");
     // console.log(this.state.board[1][1]);
+
+    console.log("INSIDE BOARD, BOARD IS BEING RENDERED!");
+
+    console.log(this.props.board);
 
     const boardSpaces = [];
     for (let i = 0; i < 16; i++) {

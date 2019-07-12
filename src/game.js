@@ -72,6 +72,8 @@ function getEnemyCards(adjSpaces, boardState, player) {
     // collect card in adjacent space only if an enemy card
     if (boardSpace && boardSpace.player !== player) {
       let card = {
+        x: space.x,
+        y: space.y,
         id: boardSpace.id,
         attackDir: space.attackDir,
         defendDir: findOppositeDirection(space.attackDir)
@@ -117,6 +119,7 @@ function determineAttacksAndCaptures(enemies, id) {
 } // end determineAttacksAndCaptures
 
 // HELPER FUNCTIONS
+///////////////////
 function findOppositeDirection(dir) {
   let oppositeDir;
 
