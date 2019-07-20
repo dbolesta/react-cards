@@ -1,30 +1,23 @@
-import React, { Component } from "react";
-import BoardSpace from "./BoardSpace";
+import React from "react";
 import Card from "./Card";
-import allCards from "../AllCards";
 import * as utils from "../utils";
 
-class CardHolder extends React.Component {
-  constructor(props) {
-    super(props);
-    this.renderCard = this.renderCard.bind(this);
+function CardHolder(props) {
+  // should this method be here? Or in App?
+  function handleDrop(index, player, bxy, id) {
+    //console.log("Should delete the " + index + " card for player " + player);
+    props.onPlayCard(index, player, bxy, id);
+    getNeighbours(bxy);
+    console.log("Handle Drop Being Called from CardHolder.js");
   }
 
-  // should this method be here? Or in App?
-  handleDrop = (index, player, bxy, id) => {
-    //console.log("Should delete the " + index + " card for player " + player);
-    this.props.onPlayCard(index, player, bxy, id);
-    this.getNeighbours(bxy);
-    console.log("Handle Drop Being Called from CardHolder.js");
-  };
-
-  getNeighbours(bxy) {
+  function getNeighbours(bxy) {
     console.log(
       "Get neighbots from the position of " + bxy.x + " and " + bxy.y
     );
   }
 
-  renderCard(i, hand, player) {
+  function renderCard(i, hand, player) {
     if (hand[i] === null) return;
 
     let chosenCard = utils.getCardById(hand[i]);
@@ -32,9 +25,7 @@ class CardHolder extends React.Component {
     return (
       <Card
         cardData={chosenCard}
-        onDrop={(index, p, bxy, id) =>
-          this.handleDrop(index, p, bxy, id)
-        }
+        onDrop={(index, p, bxy, id) => handleDrop(index, p, bxy, id)}
         inPlay={false}
         index={i}
         waitingToBeSelected={false}
@@ -42,33 +33,36 @@ class CardHolder extends React.Component {
     );
   }
 
-  render() {
-    const { player, hand } = this.props;
+  console.log(
+    "%c HEY DAMON WHATS UP",
+    "font-size: 16px; color: red;"
+  );
+  console.log(props);
+  const { player, hand } = props;
 
-    // console.log("hand for " + player);
-    // console.log(hand);
+  // console.log("hand for " + player);
+  // console.log(hand);
 
-    const cardSlots = [];
+  const cardSlots = [];
 
-    for (let i = 0; i < 5; i++) {
-      cardSlots.push(
-        <div
-          className="card-slot"
-          style={{ marginBottom: i === 5 ? "0px" : "1px" }}
-          key={i}
-        >
-          {this.renderCard(i, hand, player)}
-        </div>
-      );
-    }
-
-    return (
-      <div className="card-holder-container">
-        <p>Player {player}</p>
-        <div className="card-holder">{cardSlots}</div>
+  for (let i = 0; i < 5; i++) {
+    cardSlots.push(
+      <div
+        className="card-slot"
+        style={{ marginBottom: i === 5 ? "0px" : "1px" }}
+        key={i}
+      >
+        {renderCard(i, hand, player)}
       </div>
     );
   }
+
+  return (
+    <div className="card-holder-container">
+      <p>Player {player}</p>
+      <div className="card-holder">{cardSlots}</div>
+    </div>
+  );
 }
 
 export default CardHolder;

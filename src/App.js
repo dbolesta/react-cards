@@ -45,69 +45,69 @@ class App extends Component {
     };
   }
 
-  runAfterSetState(player, bxy, id) {
-    let spaces = game.adjacentSpaces(bxy);
+  // runAfterSetState(player, bxy, id) {
+  //   let spaces = game.adjacentSpaces(bxy);
 
-    console.log("Adjacent Spaces:");
-    console.log(spaces);
+  //   console.log("Adjacent Spaces:");
+  //   console.log(spaces);
 
-    let enemies = game.getEnemyCards(
-      spaces,
-      this.state.board,
-      player
-    );
-    console.log("Enemy Neighbors:");
-    console.log(enemies);
+  //   let enemies = game.getEnemyCards(
+  //     spaces,
+  //     this.state.board,
+  //     player
+  //   );
+  //   console.log("Enemy Neighbors:");
+  //   console.log(enemies);
 
-    let attacksAndCaptures = game.determineAttacksAndCaptures(
-      enemies,
-      id
-    );
-    console.log("Attacks & Captures:");
-    console.log(attacksAndCaptures);
+  //   let attacksAndCaptures = game.determineAttacksAndCaptures(
+  //     enemies,
+  //     id
+  //   );
+  //   console.log("Attacks & Captures:");
+  //   console.log(attacksAndCaptures);
 
-    if (attacksAndCaptures.attacks.length > 1) {
-      console.log("Need to select an attack!!");
+  //   if (attacksAndCaptures.attacks.length > 1) {
+  //     console.log("Need to select an attack!!");
 
-      // make deep copy of board state
-      let boardState = JSON.parse(JSON.stringify(this.state.board));
-      let objToAdd = { waitingToBeSelected: true };
+  //     // make deep copy of board state
+  //     let boardState = JSON.parse(JSON.stringify(this.state.board));
+  //     let objToAdd = { waitingToBeSelected: true };
 
-      attacksAndCaptures.attacks.map(card => {
-        // console.log("select card at " + card.x + " " + card.y + "?");
-        // console.log(boardState[card.x][card.y]);
-        //boardState[card.x][card.y].waitingToBeSelected = true;
-        console.log("Mapping AttacksAndCaptures");
-        this.setState({
-          board: update(this.state.board, {
-            [card.x]: { [card.y]: { $merge: objToAdd } }
-          })
-        });
-      });
+  //     attacksAndCaptures.attacks.map(card => {
+  //       // console.log("select card at " + card.x + " " + card.y + "?");
+  //       // console.log(boardState[card.x][card.y]);
+  //       //boardState[card.x][card.y].waitingToBeSelected = true;
+  //       console.log("Mapping AttacksAndCaptures");
+  //       this.setState({
+  //         board: update(this.state.board, {
+  //           [card.x]: { [card.y]: { $merge: objToAdd } }
+  //         })
+  //       });
+  //     });
 
-      console.log("ALL DONE");
+  //     console.log("ALL DONE");
 
-      console.log(this.state.board);
+  //     console.log(this.state.board);
 
-      // this.setState(
-      //   {
-      //     board: update(this.state.board, { $set: boardState })
-      //   }
-      // );
-      // this.setState({
-      //   board: boardState
-      // });
+  //     // this.setState(
+  //     //   {
+  //     //     board: update(this.state.board, { $set: boardState })
+  //     //   }
+  //     // );
+  //     // this.setState({
+  //     //   board: boardState
+  //     // });
 
-      //selectAttack(attacksAndCaptures.attacks, currentCard, attacksAndCaptures.captures);
-    } else if (
-      attacksAndCaptures.attacks.length > 0 ||
-      attacksAndCaptures.captures.length > 0
-    ) {
-      console.log("Attack or capture!!");
-      // gotta pass only 0th index, dobattle does not take an array!
-      //doBattle(attacksAndCaptures.attacks[0], currentCard, attacksAndCaptures.captures);
-    }
-  }
+  //     //selectAttack(attacksAndCaptures.attacks, currentCard, attacksAndCaptures.captures);
+  //   } else if (
+  //     attacksAndCaptures.attacks.length > 0 ||
+  //     attacksAndCaptures.captures.length > 0
+  //   ) {
+  //     console.log("Attack or capture!!");
+  //     // gotta pass only 0th index, dobattle does not take an array!
+  //     //doBattle(attacksAndCaptures.attacks[0], currentCard, attacksAndCaptures.captures);
+  //   }
+  // }
 
   handlePlayCard(index, player, bxy, id) {
     // console.log("State???");
@@ -123,20 +123,16 @@ class App extends Component {
     let x = bxy.x;
     let y = bxy.y;
 
-    this.setState(
-      {
-        // remove card from player hand
-        [player + "hand"]: update(this.state[hand], {
-          [index]: { $set: null }
-        }),
-        // add new card to board
-        board: update(this.state.board, {
-          [bxy.x]: { [bxy.y]: { $set: { id, player, x, y } } }
-        })
-      },
-      // callback to run game logic based on newly placed card
-      this.runAfterSetState(player, bxy, id)
-    );
+    this.setState({
+      // remove card from player hand
+      [player + "hand"]: update(this.state[hand], {
+        [index]: { $set: null }
+      }),
+      // add new card to board
+      board: update(this.state.board, {
+        [bxy.x]: { [bxy.y]: { $set: { id, player, x, y } } }
+      })
+    });
   }
 
   render() {

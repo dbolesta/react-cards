@@ -45,14 +45,6 @@ class Board extends Component {
     const y = i % 4;
     const x = Math.floor(i / 4);
 
-    //const tester = board[x][y];
-    // console.log("tester at " + x + "-" + y + " is:");
-    // console.log(tester);
-    //console.log("Render Board Space function " + x + "-" + y);
-
-    //  console.log("Inside renderBoardSpace. Board is: ");
-    //  console.log(board);
-
     return (
       <BoardSpace
         x={x}
@@ -61,7 +53,6 @@ class Board extends Component {
         position={x + "-" + y}
         onReceive={this.handleReceive}
       >
-        {/* {tester} */}
         {this.renderCard(x, y, board)}
       </BoardSpace>
     );
