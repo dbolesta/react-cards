@@ -40,12 +40,6 @@ function collect(connect, monitor) {
 }
 
 class Card extends Component {
-  componentWillUpdate(newProps, newState) {
-    console.log("Inside componentWillUpdate for Card");
-    console.log("New Props: ", newProps.waitingToBeSelected);
-    console.log("New State: ", newState);
-  }
-
   render() {
     const {
       isDragging,

@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import BoardSpace from "./BoardSpace";
 import ScoreBoard from "./ScoreBoard";
 import Card from "./Card";
-import * as utils from "./utils";
+import * as utils from "../utils";
 
 // Only necessary for testing
 // import Card from './Card'
-// import allCards from './AllCards'
+// import allCards from '../AllCards'
 
 class Board extends Component {
   constructor(props) {

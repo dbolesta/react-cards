@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import Card from "./Card";
-import CardHolder from "./CardHolder";
-import Board from "./Board";
+import Card from "./components/Card";
+import CardHolder from "./components/CardHolder";
+import Board from "./components/Board";
 import "./App.css";
 import "./Card.css";
 import HTML5Backend from "react-dnd-html5-backend";

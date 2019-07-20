@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import BoardSpace from "./BoardSpace";
 import Card from "./Card";
-import allCards from "./AllCards";
-import * as utils from "./utils";
+import allCards from "../AllCards";
+import * as utils from "../utils";
 
 class CardHolder extends React.Component {
   constructor(props) {
