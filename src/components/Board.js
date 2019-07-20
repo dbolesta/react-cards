@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import BoardSpace from "./BoardSpace";
 import ScoreBoard from "./ScoreBoard";
 import Card from "./Card";
@@ -8,40 +8,33 @@ import * as utils from "../utils";
 // import Card from './Card'
 // import allCards from '../AllCards'
 
-class Board extends Component {
-  constructor(props) {
-    super(props);
-    this.handleDrop = this.handleDrop.bind(this);
-    this.renderBoardSpace = this.renderBoardSpace.bind(this);
-    this.renderCard = this.renderCard.bind(this);
-    this.handleReceive = this.handleReceive.bind(this);
-  }
-
-  handleDrop = id => {
-    console.log("find me");
+function Board(props) {
+  // dont think this is being used
+  function handleDrop(id) {
+    console.log("%c find me", "font-size:30px; color: blue");
     console.log(id);
-  };
-
-  handleReceive() {
-    // dont atually need this function, can probably delete? maybe
-    console.log("handle receive!!");
   }
 
-  renderCard(x, y, board) {
-    //  console.log("INSIDE RENDER CARD");
-    //  console.log(board[x][y]);
+  // dont atually need this function, can probably delete? maybe
+  function handleReceive() {
+    console.log(
+      "%c handle receive!!",
+      "font-size: 30px; color: purple"
+    );
+  }
+
+  function renderCard(x, y, board) {
     if (board[x][y]) {
       return (
         <Card
           cardData={utils.getCardById(board[x][y].id)}
           inPlay={true}
-          waitingToBeSelected={board[x][y].waitingToBeSelected}
         />
       );
     }
   }
 
-  renderBoardSpace(i, board) {
+  function renderBoardSpace(i, board) {
     const y = i % 4;
     const x = Math.floor(i / 4);
 
@@ -49,38 +42,34 @@ class Board extends Component {
       <BoardSpace
         x={x}
         y={y}
-        key={i}
+        key={x + "-" + y}
         position={x + "-" + y}
-        onReceive={this.handleReceive}
       >
-        {this.renderCard(x, y, board)}
+        {renderCard(x, y, board)}
       </BoardSpace>
     );
   }
 
-  render() {
-    // console.log("figurung out state");
-    // console.log(this.state.board[1][1]);
+  console.log(
+    "%c INSIDE BOARD, BOARD IS BEING RENDERED!",
+    "font-size: 14px; color: blue;"
+  );
+  console.log(props.board);
 
-    console.log("INSIDE BOARD, BOARD IS BEING RENDERED!");
-
-    console.log(this.props.board);
-
-    const boardSpaces = [];
-    for (let i = 0; i < 16; i++) {
-      boardSpaces.push(this.renderBoardSpace(i, this.props.board));
-    }
-
-    return (
-      <div className="card-board-container">
-        <div className="score-board">
-          <ScoreBoard score={this.props.score} />
-        </div>
-
-        <div className="card-board">{boardSpaces}</div>
-      </div>
-    );
+  const boardSpaces = [];
+  for (let i = 0; i < 16; i++) {
+    boardSpaces.push(renderBoardSpace(i, props.board));
   }
+
+  return (
+    <div className="card-board-container">
+      <div className="score-board">
+        <ScoreBoard score={props.score} />
+      </div>
+
+      <div className="card-board">{boardSpaces}</div>
+    </div>
+  );
 }
 
 export default Board;

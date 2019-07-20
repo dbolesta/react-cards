@@ -3,9 +3,8 @@ import Card from "./Card";
 import * as utils from "../utils";
 
 function CardHolder(props) {
-  // should this method be here? Or in App?
+  // should this function be here? Or in App?
   function handleDrop(index, player, bxy, id) {
-    //console.log("Should delete the " + index + " card for player " + player);
     props.onPlayCard(index, player, bxy, id);
     getNeighbours(bxy);
     console.log("Handle Drop Being Called from CardHolder.js");

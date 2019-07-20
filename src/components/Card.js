@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { DragSource } from "react-dnd";
 
 const itemSource = {
@@ -39,64 +39,53 @@ function collect(connect, monitor) {
   };
 }
 
-class Card extends Component {
-  render() {
-    const {
-      isDragging,
-      connectDragSource,
-      waitingToBeSelected
-    } = this.props;
-    const { numbers, title, owner, id } = this.props.cardData;
+function Card(props) {
+  const {
+    isDragging,
+    connectDragSource,
+    waitingToBeSelected
+  } = props;
+  const { numbers, title, owner, id } = props.cardData;
 
-    //  console.log(
-    //    "INSIDE CARD, WAITING TO BE SELECTED for card id " +
-    //      id +
-    //      " PROPS IS:"
-    //  );
-    //  //  console.log(numbers);
-    //  console.log(this.props);
-    const opacity = isDragging ? 0 : 1;
-    // container for all arrow JSX
-    const arrows = [];
+  const opacity = isDragging ? 0 : 1;
+  // container for all arrow JSX
+  const arrows = [];
 
-    // loop through numbers object prop using Object.keys so we can get key / value
-    Object.keys(numbers).map(function(keyName, keyIndex) {
-      // if no number, return empty handed
-      if (numbers[keyName] === null) return;
+  // loop through numbers object prop using Object.keys so we can get key / value
+  Object.keys(numbers).map(function(keyName, keyIndex) {
+    // if no number, return empty handed
+    if (numbers[keyName] === null) return;
 
-      // add the JSX using keyName for styling
-      arrows.push(
-        <React.Fragment key={keyName}>
-          <span className={"arrow arrow-" + keyName} key={keyName}>
-            {/* <span>{numbers[keyName]}</span> */}
-          </span>
-          <span
-            className={"arrow-num arrow-" + keyName + "-num"}
-            key={keyName + "-num"}
-          >
-            {numbers[keyName]}
-          </span>
-        </React.Fragment>
-      );
-    });
-
-    return connectDragSource(
-      <div
-        className={
-          "card card-" +
-          owner +
-          (waitingToBeSelected === true ? "card-select" : "")
-        }
-        style={{ opacity }}
-        title={title}
-      >
-        <div className="arrow-container">
-          {arrows}
-          <div className="card-color" />
-        </div>
-      </div>
+    // add the JSX using keyName for styling
+    arrows.push(
+      <React.Fragment key={keyName}>
+        <span className={"arrow arrow-" + keyName} key={keyName} />
+        <span
+          className={"arrow-num arrow-" + keyName + "-num"}
+          key={keyName + "-num"}
+        >
+          {numbers[keyName]}
+        </span>
+      </React.Fragment>
     );
-  }
+  });
+
+  return connectDragSource(
+    <div
+      className={
+        "card card-" +
+        owner +
+        (waitingToBeSelected === true ? "card-select" : "")
+      }
+      style={{ opacity }}
+      title={title}
+    >
+      <div className="arrow-container">
+        {arrows}
+        <div className="card-color" />
+      </div>
+    </div>
+  );
 }
 
 export default DragSource("card", itemSource, collect)(Card);
