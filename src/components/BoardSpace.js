@@ -3,14 +3,31 @@ import { DropTarget } from "react-dnd";
 
 const targetSource = {
   drop(props, monitor) {
+    // console.log(
+    //   "%c DROPPED ON TARGET AT POSITION " + props.x + "-" + props.y,
+    //   "font-size: 13px; color: purple"
+    // );
     console.log(
-      "%c DROPPED ON TARGET AT POSITION" + props.x + "-" + props.y,
-      "font-size: 13px; color: purple"
+      "%c What is in BoardSpace Props??",
+      "font-size: 15px; color: yellow;"
     );
+    console.log(props);
+
+    // PREVENT dropping of cards in BoardSpaces that already have a card!
+    //if (props.children) return false;
+
     return { x: props.x, y: props.y }; // this passed coords to the Card as monitor.getDropResult() in its endDrag method
   },
   hover(props) {
-    //console.log("HOVERING");
+    // console.log("%c HOVERING", "font-size:15px; color: green");
+    // console.log(props);
+  },
+  canDrop(props) {
+    if (props.children) {
+      return false;
+    } else {
+      return true;
+    }
   }
 };
 

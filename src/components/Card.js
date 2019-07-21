@@ -4,6 +4,7 @@ import { DragSource } from "react-dnd";
 const itemSource = {
   beginDrag(props) {
     console.log("Im draggin ma");
+    console.log(props);
     return props;
   },
   endDrag(props, monitor, component) {
@@ -11,17 +12,22 @@ const itemSource = {
       return;
     }
 
-    console.log("TESTING END DRAG PASS???");
-    console.log(monitor.getDropResult());
+    const { onDrop, index } = props;
+    const { owner, id } = props.cardData;
 
-    return props.onDrop(
-      props.index,
-      props.cardData.owner,
-      monitor.getDropResult(),
-      props.cardData.id
+    return onDrop(
+      index,
+      owner,
+      monitor.getDropResult(), // monitor.getDropResult is the object returned in the drop() method of BoardSpace
+      id
     );
   },
-  canDrag(props) {
+  canDrag(props, monitor) {
+    console.log(
+      "%c Inside Can Drag, Monitor:",
+      "font-size: 30px; color:red"
+    );
+    console.log(monitor);
     // used to disable dragging if card is on the Board ("inPlay")
     if (props.inPlay) {
       return false;
@@ -34,12 +40,21 @@ const itemSource = {
 function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
-    connectDragPreview: connect.dragPreview(),
+    //connectDragPreview: connect.dragPreview(), // dont think need?
     isDragging: monitor.isDragging()
   };
 }
 
+/// Card Component
+//////////////////
 function Card(props) {
+  console.log(
+    "%c Card Props, wtbs here?",
+    "font-size: 25px; color: purple"
+  );
+  console.log(props);
+
+  // destructure props
   const {
     isDragging,
     connectDragSource,
@@ -75,7 +90,7 @@ function Card(props) {
       className={
         "card card-" +
         owner +
-        (waitingToBeSelected === true ? "card-select" : "")
+        (waitingToBeSelected === true ? " card-select" : "")
       }
       style={{ opacity }}
       title={title}

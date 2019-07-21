@@ -41,7 +41,8 @@ class App extends Component {
       score: {
         p1: 9,
         p2: 123
-      }
+      },
+      gameState: "playing"
     };
   }
 
@@ -117,11 +118,39 @@ class App extends Component {
     //   "...move card " + id + " to " + bxy.x + "-" + bxy.y + "???"
     // );
 
+    console.log(
+      "%c Game Logic Inside App.js:",
+      "font-size: 16px; color: red"
+    );
+    let spaces = game.adjacentSpaces(bxy);
+
+    console.log("Adjacent Spaces:");
+    console.log(spaces);
+
+    let enemies = game.getEnemyCards(
+      spaces,
+      this.state.board,
+      player
+    );
+    console.log("Enemy Neighbors:");
+    console.log(enemies);
+
+    let attacksAndCaptures = game.determineAttacksAndCaptures(
+      enemies,
+      id
+    );
+    console.log("Attacks & Captures:");
+    console.log(attacksAndCaptures);
+    console.log(attacksAndCaptures.attacks.length);
+
     console.log("HANDLEPLAYCARD IS BEING CALLED!!!!!!!");
 
     let hand = player + "hand";
-    let x = bxy.x;
-    let y = bxy.y;
+    let { x, y } = bxy;
+    let x2 = x + 1;
+    let y2 = y + 1;
+
+    let monkey = true;
 
     this.setState({
       // remove card from player hand
@@ -130,9 +159,16 @@ class App extends Component {
       }),
       // add new card to board
       board: update(this.state.board, {
-        [bxy.x]: { [bxy.y]: { $set: { id, player, x, y } } }
+        [x]: { [y]: { $set: { id, player, x, y } } }
       })
     });
+  }
+
+  componentDidUpdate() {
+    console.log("Board State in Component Did Update, here is state");
+
+    /// CHECK IF THERE ARE NEIGHBORS
+    console.log(this.state.board);
   }
 
   render() {

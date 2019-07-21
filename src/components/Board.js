@@ -9,6 +9,8 @@ import * as utils from "../utils";
 // import allCards from '../AllCards'
 
 function Board(props) {
+  const { score, board } = props;
+
   // dont think this is being used
   function handleDrop(id) {
     console.log("%c find me", "font-size:30px; color: blue");
@@ -24,6 +26,8 @@ function Board(props) {
   }
 
   function renderCard(x, y, board) {
+    // will only actually render card if there is card to render
+    // otherwise the following code will not run, and an empty BoardSpace will be created
     if (board[x][y]) {
       return (
         <Card
@@ -54,17 +58,19 @@ function Board(props) {
     "%c INSIDE BOARD, BOARD IS BEING RENDERED!",
     "font-size: 14px; color: blue;"
   );
-  console.log(props.board);
+  console.log(board);
 
   const boardSpaces = [];
   for (let i = 0; i < 16; i++) {
-    boardSpaces.push(renderBoardSpace(i, props.board));
+    // console.log("looping board spaces :)");
+    // console.log(board);
+    boardSpaces.push(renderBoardSpace(i, board));
   }
 
   return (
     <div className="card-board-container">
       <div className="score-board">
-        <ScoreBoard score={props.score} />
+        <ScoreBoard score={score} />
       </div>
 
       <div className="card-board">{boardSpaces}</div>

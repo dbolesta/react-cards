@@ -1,9 +1,18 @@
 import React from "react";
 import Card from "./Card";
 import * as utils from "../utils";
+import * as game from "../game";
 
 function CardHolder(props) {
-  // should this function be here? Or in App?
+  console.log(
+    "%c HEY DAMON WHATS UP",
+    "font-size: 16px; color: red;"
+  );
+  console.log(props);
+  const { player, hand } = props;
+
+  // handleDrop() receives from onDrop (inside endDrag) in Card,
+  // sends to handlePlayCard in App
   function handleDrop(index, player, bxy, id) {
     props.onPlayCard(index, player, bxy, id);
     getNeighbours(bxy);
@@ -12,11 +21,17 @@ function CardHolder(props) {
 
   function getNeighbours(bxy) {
     console.log(
-      "Get neighbots from the position of " + bxy.x + " and " + bxy.y
+      "%c Getting neighbots from the position of " +
+        bxy.x +
+        " and " +
+        bxy.y,
+      "font-size:19px; color: purple;"
     );
+    console.log(game.adjacentSpaces(bxy));
   }
 
   function renderCard(i, hand, player) {
+    // dont render if car has been played
     if (hand[i] === null) return;
 
     let chosenCard = utils.getCardById(hand[i]);
@@ -31,13 +46,6 @@ function CardHolder(props) {
       />
     );
   }
-
-  console.log(
-    "%c HEY DAMON WHATS UP",
-    "font-size: 16px; color: red;"
-  );
-  console.log(props);
-  const { player, hand } = props;
 
   // console.log("hand for " + player);
   // console.log(hand);
