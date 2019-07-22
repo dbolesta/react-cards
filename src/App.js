@@ -150,7 +150,14 @@ class App extends Component {
     let x2 = x + 1;
     let y2 = y + 1;
 
-    let monkey = true;
+    let waitingToBeSelected = false;
+
+    if (attacksAndCaptures.attacks.length >= 2) {
+      console.log(
+        "%c its time to select",
+        "font-size: 30px; color: green"
+      );
+    }
 
     this.setState({
       // remove card from player hand
@@ -159,7 +166,9 @@ class App extends Component {
       }),
       // add new card to board
       board: update(this.state.board, {
-        [x]: { [y]: { $set: { id, player, x, y } } }
+        [x]: {
+          [y]: { $set: { id, player, x, y, waitingToBeSelected } }
+        }
       })
     });
   }
@@ -169,6 +178,11 @@ class App extends Component {
 
     /// CHECK IF THERE ARE NEIGHBORS
     console.log(this.state.board);
+  }
+
+  selectCard(e) {
+    console.log("help me please");
+    console.log(e.target);
   }
 
   render() {
@@ -182,7 +196,11 @@ class App extends Component {
             hand={this.state.p1hand}
             onPlayCard={this.handlePlayCard}
           />
-          <Board score={this.state.score} board={this.state.board} />
+          <Board
+            score={this.state.score}
+            board={this.state.board}
+            onSelectCard={e => this.selectCard(e)}
+          />
           <CardHolder
             player="p2"
             hand={this.state.p2hand}

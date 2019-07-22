@@ -1,12 +1,12 @@
-import React from "react";
-import Card from "./Card";
-import * as utils from "../utils";
-import * as game from "../game";
+import React from 'react';
+import Card from './Card';
+import * as utils from '../utils';
+import * as game from '../game';
 
 function CardHolder(props) {
   console.log(
-    "%c HEY DAMON WHATS UP",
-    "font-size: 16px; color: red;"
+    '%c HEY DAMON WHATS UP',
+    'font-size: 16px; color: red;'
   );
   console.log(props);
   const { player, hand } = props;
@@ -16,16 +16,16 @@ function CardHolder(props) {
   function handleDrop(index, player, bxy, id) {
     props.onPlayCard(index, player, bxy, id);
     getNeighbours(bxy);
-    console.log("Handle Drop Being Called from CardHolder.js");
+    console.log('Handle Drop Being Called from CardHolder.js');
   }
 
   function getNeighbours(bxy) {
     console.log(
-      "%c Getting neighbots from the position of " +
+      '%c Getting neighbots from the position of ' +
         bxy.x +
-        " and " +
+        ' and ' +
         bxy.y,
-      "font-size:19px; color: purple;"
+      'font-size:19px; color: purple;'
     );
     console.log(game.adjacentSpaces(bxy));
   }
@@ -56,7 +56,7 @@ function CardHolder(props) {
     cardSlots.push(
       <div
         className="card-slot"
-        style={{ marginBottom: i === 5 ? "0px" : "1px" }}
+        style={{ marginBottom: i === 5 ? '0px' : '1px' }}
         key={i}
       >
         {renderCard(i, hand, player)}

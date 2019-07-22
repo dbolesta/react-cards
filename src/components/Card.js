@@ -48,17 +48,18 @@ function collect(connect, monitor) {
 /// Card Component
 //////////////////
 function Card(props) {
-  console.log(
-    "%c Card Props, wtbs here?",
-    "font-size: 25px; color: purple"
-  );
-  console.log(props);
+  // console.log(
+  //   "%c Card Props, wtbs here?",
+  //   "font-size: 25px; color: purple"
+  // );
+  // console.log(props);
 
   // destructure props
   const {
     isDragging,
     connectDragSource,
-    waitingToBeSelected
+    waitingToBeSelected,
+    position
   } = props;
   const { numbers, title, owner, id } = props.cardData;
 
@@ -87,13 +88,15 @@ function Card(props) {
 
   return connectDragSource(
     <div
+      onClick={props.onClickCard}
       className={
         "card card-" +
         owner +
         (waitingToBeSelected === true ? " card-select" : "")
       }
       style={{ opacity }}
-      title={title}
+      data-title={title}
+      data-position={position}
     >
       <div className="arrow-container">
         {arrows}

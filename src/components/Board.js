@@ -9,8 +9,10 @@ import * as utils from "../utils";
 // import allCards from '../AllCards'
 
 function Board(props) {
-  const { score, board } = props;
+  const { score, board, onSelectCard } = props;
 
+  console.log("%c BOARD PROPS", "font-size: 30px;");
+  console.log(props);
   // dont think this is being used
   function handleDrop(id) {
     console.log("%c find me", "font-size:30px; color: blue");
@@ -25,14 +27,29 @@ function Board(props) {
     );
   }
 
+  // function selectCard() {
+  //   console.log("hh");
+  //   alert("selected card");
+  // }
+
   function renderCard(x, y, board) {
     // will only actually render card if there is card to render
     // otherwise the following code will not run, and an empty BoardSpace will be created
     if (board[x][y]) {
+      console.log(
+        "%c Checking Bord xy",
+        "font-size: 20px; color: blue"
+      );
+      console.log(board[x][y]);
       return (
         <Card
           cardData={utils.getCardById(board[x][y].id)}
           inPlay={true}
+          waitingToBeSelected={board[x][y].waitingToBeSelected}
+          onClickCard={
+            board[x][y].waitingToBeSelected ? onSelectCard : undefined
+          }
+          position={x + "-" + y}
         />
       );
     }
