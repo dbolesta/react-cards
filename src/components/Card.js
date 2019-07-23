@@ -1,9 +1,9 @@
-import React from "react";
-import { DragSource } from "react-dnd";
+import React from 'react';
+import { DragSource } from 'react-dnd';
 
 const itemSource = {
   beginDrag(props) {
-    console.log("Im draggin ma");
+    console.log('Im draggin ma');
     console.log(props);
     return props;
   },
@@ -23,11 +23,6 @@ const itemSource = {
     );
   },
   canDrag(props, monitor) {
-    console.log(
-      "%c Inside Can Drag, Monitor:",
-      "font-size: 30px; color:red"
-    );
-    console.log(monitor);
     // used to disable dragging if card is on the Board ("inPlay")
     if (props.inPlay) {
       return false;
@@ -48,12 +43,6 @@ function collect(connect, monitor) {
 /// Card Component
 //////////////////
 function Card(props) {
-  // console.log(
-  //   "%c Card Props, wtbs here?",
-  //   "font-size: 25px; color: purple"
-  // );
-  // console.log(props);
-
   // destructure props
   const {
     isDragging,
@@ -75,10 +64,10 @@ function Card(props) {
     // add the JSX using keyName for styling
     arrows.push(
       <React.Fragment key={keyName}>
-        <span className={"arrow arrow-" + keyName} key={keyName} />
+        <span className={'arrow arrow-' + keyName} key={keyName} />
         <span
-          className={"arrow-num arrow-" + keyName + "-num"}
-          key={keyName + "-num"}
+          className={'arrow-num arrow-' + keyName + '-num'}
+          key={keyName + '-num'}
         >
           {numbers[keyName]}
         </span>
@@ -90,9 +79,9 @@ function Card(props) {
     <div
       onClick={props.onClickCard}
       className={
-        "card card-" +
+        'card card-' +
         owner +
-        (waitingToBeSelected === true ? " card-select" : "")
+        (waitingToBeSelected === true ? ' card-select' : '')
       }
       style={{ opacity }}
       data-title={title}
@@ -106,5 +95,5 @@ function Card(props) {
   );
 }
 
-export default DragSource("card", itemSource, collect)(Card);
+export default DragSource('card', itemSource, collect)(Card);
 //export default Card

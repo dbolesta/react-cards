@@ -1,8 +1,8 @@
-import React from "react";
-import BoardSpace from "./BoardSpace";
-import ScoreBoard from "./ScoreBoard";
-import Card from "./Card";
-import * as utils from "../utils";
+import React from 'react';
+import BoardSpace from './BoardSpace';
+import ScoreBoard from './ScoreBoard';
+import Card from './Card';
+import * as utils from '../utils';
 
 // Only necessary for testing
 // import Card from './Card'
@@ -11,19 +11,17 @@ import * as utils from "../utils";
 function Board(props) {
   const { score, board, onSelectCard } = props;
 
-  console.log("%c BOARD PROPS", "font-size: 30px;");
-  console.log(props);
   // dont think this is being used
   function handleDrop(id) {
-    console.log("%c find me", "font-size:30px; color: blue");
+    console.log('%c find me', 'font-size:30px; color: blue');
     console.log(id);
   }
 
   // dont atually need this function, can probably delete? maybe
   function handleReceive() {
     console.log(
-      "%c handle receive!!",
-      "font-size: 30px; color: purple"
+      '%c handle receive!!',
+      'font-size: 30px; color: purple'
     );
   }
 
@@ -37,8 +35,8 @@ function Board(props) {
     // otherwise the following code will not run, and an empty BoardSpace will be created
     if (board[x][y]) {
       console.log(
-        "%c Checking Bord xy",
-        "font-size: 20px; color: blue"
+        '%c Checking Bord xy',
+        'font-size: 20px; color: blue'
       );
       console.log(board[x][y]);
       return (
@@ -49,7 +47,7 @@ function Board(props) {
           onClickCard={
             board[x][y].waitingToBeSelected ? onSelectCard : undefined
           }
-          position={x + "-" + y}
+          position={x + '-' + y}
         />
       );
     }
@@ -63,19 +61,13 @@ function Board(props) {
       <BoardSpace
         x={x}
         y={y}
-        key={x + "-" + y}
-        position={x + "-" + y}
+        key={x + '-' + y}
+        position={x + '-' + y}
       >
         {renderCard(x, y, board)}
       </BoardSpace>
     );
   }
-
-  console.log(
-    "%c INSIDE BOARD, BOARD IS BEING RENDERED!",
-    "font-size: 14px; color: blue;"
-  );
-  console.log(board);
 
   const boardSpaces = [];
   for (let i = 0; i < 16; i++) {
