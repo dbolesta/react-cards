@@ -4,18 +4,18 @@ import * as utils from '../utils';
 import * as game from '../game';
 
 function CardHolder(props) {
-  console.log(
-    '%c HEY DAMON WHATS UP',
-    'font-size: 16px; color: red;'
-  );
-  console.log(props);
+  // console.log(
+  //   '%c HEY DAMON WHATS UP',
+  //   'font-size: 16px; color: red;'
+  // );
+  // console.log(props);
   const { player, hand } = props;
 
   // handleDrop() receives from onDrop (inside endDrag) in Card,
   // sends to handlePlayCard in App
   function handleDrop(index, player, bxy, id) {
     props.onPlayCard(index, player, bxy, id);
-    getNeighbours(bxy);
+    //getNeighbours(bxy);
     console.log('Handle Drop Being Called from CardHolder.js');
   }
 
@@ -63,7 +63,10 @@ function CardHolder(props) {
       </div>
     );
   }
-
+  console.log(
+    '%c CARDHOLDER IS RENDERING',
+    'font-size:40px; color: green'
+  );
   return (
     <div className="card-holder-container">
       <p>Player {player}</p>

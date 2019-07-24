@@ -34,11 +34,21 @@ function Board(props) {
     // will only actually render card if there is card to render
     // otherwise the following code will not run, and an empty BoardSpace will be created
     if (board[x][y]) {
+      // console.log(
+      //   '%c Checking Board xy',
+      //   'font-size: 20px; color: blue'
+      // );
+      // console.log(board[x][y]);
+      let chosenCard = utils.getCardById(board[x][y].id);
+      chosenCard.owner = board[x][y].player;
+
       console.log(
-        '%c Checking Bord xy',
-        'font-size: 20px; color: blue'
+        '%c Rendering Card in board...',
+        'font-size:30px; color: blue'
       );
       console.log(board[x][y]);
+      console.log(chosenCard);
+
       return (
         <Card
           cardData={utils.getCardById(board[x][y].id)}

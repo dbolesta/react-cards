@@ -1,4 +1,4 @@
-import allCards from "./AllCards";
+import allCards from './AllCards';
 
 function adjacentSpaces(bxy) {
   // figure out all 8 adjacent possible squares
@@ -11,42 +11,42 @@ function adjacentSpaces(bxy) {
     {
       x: bxy.x - 1,
       y: bxy.y - 1,
-      attackDir: "tl"
+      attackDir: 'tl'
     },
     {
       x: bxy.x - 1,
       y: bxy.y,
-      attackDir: "t"
+      attackDir: 't'
     },
     {
       x: bxy.x - 1,
       y: bxy.y + 1,
-      attackDir: "tr"
+      attackDir: 'tr'
     },
     {
       x: bxy.x,
       y: bxy.y - 1,
-      attackDir: "l"
+      attackDir: 'l'
     },
     {
       x: bxy.x,
       y: bxy.y + 1,
-      attackDir: "r"
+      attackDir: 'r'
     },
     {
       x: bxy.x + 1,
       y: bxy.y - 1,
-      attackDir: "bl"
+      attackDir: 'bl'
     },
     {
       x: bxy.x + 1,
       y: bxy.y,
-      attackDir: "b"
+      attackDir: 'b'
     },
     {
       x: bxy.x + 1,
       y: bxy.y + 1,
-      attackDir: "br"
+      attackDir: 'br'
     }
   ];
 
@@ -118,27 +118,72 @@ function determineAttacksAndCaptures(enemies, id) {
   };
 } // end determineAttacksAndCaptures
 
+function cardBattle(enemyCard, playedCard) {
+  console.log(
+    '%c Inside cardBattle()',
+    'font-size: 25px; color: blue'
+  );
+  console.log(enemyCard);
+  console.log(playedCard);
+
+  const playedCardId = playedCard.id;
+  const { attackDir, defendDir } = enemyCard;
+  console.log(`AttackDir: ${attackDir}, defendDir ${defendDir}`);
+
+  const enemyCardNums = getNumsFromID(enemyCard.id);
+  const playedCardNums = getNumsFromID(playedCardId);
+  console.log(
+    `enemyCardNums: ${enemyCardNums}, playedCardNums ${playedCardNums}`
+  );
+
+  const defend = enemyCardNums[defendDir];
+  const attack = playedCardNums[attackDir];
+  console.log(`attack: ${attack}, defend ${defend}`);
+
+  // this is terrible, there has to be a better way
+  if (attack > defend) {
+    console.log('Played card wins!!');
+    // send x & y of enemy
+    // and CURRENT player text (so we can swap class style)
+
+    return {
+      x: enemyCard.x,
+      y: enemyCard.y,
+      player: playedCard.player
+    };
+  } else if (defend > attack) {
+    console.log('Enemy Card won, dumb play!');
+
+    // send x & y of current card
+    // and OPPOSITE of played text
+    let oppPlayer = playedCard.player === 'p1' ? 'p2' : 'p1';
+    return { x: playedCard.x, y: playedCard.y, player: oppPlayer };
+  } else if (attack === defend) {
+    console.log('We gotta do tie logic!!!');
+  }
+} // end cardBattle
+
 // HELPER FUNCTIONS
 ///////////////////
 function findOppositeDirection(dir) {
   let oppositeDir;
 
-  if (dir === "tl") {
-    oppositeDir = "br";
-  } else if (dir === "t") {
-    oppositeDir = "b";
-  } else if (dir === "tr") {
-    oppositeDir = "bl";
-  } else if (dir === "l") {
-    oppositeDir = "r";
-  } else if (dir === "r") {
-    oppositeDir = "l";
-  } else if (dir === "bl") {
-    oppositeDir = "tr";
-  } else if (dir === "b") {
-    oppositeDir = "t";
-  } else if (dir === "br") {
-    oppositeDir = "tl";
+  if (dir === 'tl') {
+    oppositeDir = 'br';
+  } else if (dir === 't') {
+    oppositeDir = 'b';
+  } else if (dir === 'tr') {
+    oppositeDir = 'bl';
+  } else if (dir === 'l') {
+    oppositeDir = 'r';
+  } else if (dir === 'r') {
+    oppositeDir = 'l';
+  } else if (dir === 'bl') {
+    oppositeDir = 'tr';
+  } else if (dir === 'b') {
+    oppositeDir = 't';
+  } else if (dir === 'br') {
+    oppositeDir = 'tl';
   }
 
   return oppositeDir;
@@ -149,4 +194,9 @@ function getNumsFromID(id) {
   return allCards[index].numbers;
 }
 
-export { adjacentSpaces, getEnemyCards, determineAttacksAndCaptures };
+export {
+  adjacentSpaces,
+  getEnemyCards,
+  determineAttacksAndCaptures,
+  cardBattle
+};

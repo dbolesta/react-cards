@@ -52,6 +52,12 @@ function Card(props) {
   } = props;
   const { numbers, title, owner, id } = props.cardData;
 
+  console.log(
+    '%c IM A CARD AND MY OWNER IS...',
+    'font-size:20px; color: red'
+  );
+  console.log(position, owner);
+
   const opacity = isDragging ? 0 : 1;
   // container for all arrow JSX
   const arrows = [];

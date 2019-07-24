@@ -111,7 +111,7 @@ class App extends Component {
   // }
 
   handlePlayCard(index, player, bxy, id) {
-    console.log('%c HandlePlayCard()', 'font-size: 16px; color: red');
+    //console.log('%c HandlePlayCard()', 'font-size: 16px; color: red');
     // collect array of all adjacent spaces
     let spaces = game.adjacentSpaces(bxy);
 
@@ -136,6 +136,10 @@ class App extends Component {
     // console.log('Attacks & Captures:');
     // console.log(attacksAndCaptures);
 
+    /////////
+    ////// SetState Stuff
+    /////////
+
     // create vars that will be used in object that will represent card, to be placed within board
     let pHand = player + 'hand';
     let { x, y } = bxy;
@@ -152,8 +156,44 @@ class App extends Component {
     let boardClone = JSON.parse(JSON.stringify(this.state.board));
     boardClone[x][y] = { id, player, x, y, waitingToBeSelected };
 
+    /////////////
+    /////////////
+    ///// Battle Shit
+    ////////////////
+    ////////////////
+
+    if (attacksAndCaptures.attacks.length === 1) {
+      console.log(
+        '%c in atacap ====1',
+        'font-size: 15px; color: blue'
+      );
+
+      let enemyCard = attacksAndCaptures.attacks[0];
+
+      // this is terrible, there has to be a better way
+      let winResults = game.cardBattle(enemyCard, {
+        x,
+        y,
+        id,
+        player
+      });
+      console.log(
+        '%c Fuck this shiiittt',
+        'font-size: 20px; color: green'
+      );
+      console.log(winResults);
+
+      console.log(boardClone[winResults.x][winResults.y]);
+      boardClone[winResults.x][winResults.y] = {
+        ...boardClone[winResults.x][winResults.y],
+        x: winResults.x,
+        y: winResults.y,
+        player: winResults.player
+      };
+      console.log(boardClone[winResults.x][winResults.y]);
+    }
     // if there are multiple cards to attack, the user must be prompted to select one of the cards
-    if (attacksAndCaptures.attacks.length >= 2) {
+    else if (attacksAndCaptures.attacks.length >= 2) {
       // first, create array of coordinates (converted to string for simplicity of comparison later)
       // of all enemy cards
       let attacksCoords = attacksAndCaptures.attacks.map(
@@ -175,6 +215,7 @@ class App extends Component {
       );
     }
 
+    // set state with the results of above
     this.setState({
       [pHand]: handClone,
       board: boardClone
