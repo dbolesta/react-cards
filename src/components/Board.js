@@ -66,6 +66,10 @@ function Board(props) {
   function renderBoardSpace(i, board) {
     const y = i % 4;
     const x = Math.floor(i / 4);
+    console.log(
+      `%c <BoardSpace> ${x}-${y} is about to render`,
+      'font-size:14px; color: purple'
+    );
 
     return (
       <BoardSpace

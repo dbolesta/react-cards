@@ -70,6 +70,14 @@ function getEnemyCards(adjSpaces, boardState, player) {
   adjSpaces.forEach(function(space) {
     let boardSpace = boardState[space.x][space.y];
     // collect card in adjacent space only if an enemy card
+    if (boardSpace) {
+      console.log(
+        '%c HERES BOARDSPACE, LOOK FOR PLAYER!!!!',
+        'font-size: 30px; color: red;'
+      );
+      console.log(boardSpace);
+    }
+
     if (boardSpace && boardSpace.player !== player) {
       let card = {
         x: space.x,

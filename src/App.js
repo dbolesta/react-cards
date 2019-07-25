@@ -115,8 +115,8 @@ class App extends Component {
     // collect array of all adjacent spaces
     let spaces = game.adjacentSpaces(bxy);
 
-    // console.log('Adjacent Spaces:');
-    // console.log(spaces);
+    console.log('Adjacent Spaces:');
+    console.log(spaces);
 
     // filter enemy cards from adjacent spaces
     let enemies = game.getEnemyCards(
@@ -125,16 +125,16 @@ class App extends Component {
       player
     );
 
-    // console.log('Enemy Neighbors:');
-    // console.log(enemies);
+    console.log('Enemy Neighbors:');
+    console.log(enemies);
 
     // create object contaning 1 array for all attacks, and 1 for all captures
     let attacksAndCaptures = game.determineAttacksAndCaptures(
       enemies,
       id
     );
-    // console.log('Attacks & Captures:');
-    // console.log(attacksAndCaptures);
+    console.log('Attacks & Captures:');
+    console.log(attacksAndCaptures);
 
     /////////
     ////// SetState Stuff
@@ -164,7 +164,7 @@ class App extends Component {
 
     if (attacksAndCaptures.attacks.length === 1) {
       console.log(
-        '%c in atacap ====1',
+        '%c in attack/capture === 1',
         'font-size: 15px; color: blue'
       );
 
@@ -178,7 +178,7 @@ class App extends Component {
         player
       });
       console.log(
-        '%c Fuck this shiiittt',
+        '%c Results from win, and comparison of boardClone update:',
         'font-size: 20px; color: green'
       );
       console.log(winResults);
@@ -221,6 +221,11 @@ class App extends Component {
       board: boardClone
     });
 
+    console.log(
+      '%c State was just set :D ',
+      'font-size: 30px; color: purple'
+    );
+
     // old setstate call using i-h
     // remove card from player hand
     //   [player + 'hand']: update(this.state[hand], {
@@ -234,13 +239,13 @@ class App extends Component {
     //   })
   }
 
-  componentDidUpdate() {
-    console.log('componentDidUpdate() within App.js');
-  }
+  // componentDidUpdate() {
+  //   console.log('componentDidUpdate() within App.js');
+  // }
 
   // function to pass down to Card if 'waitingToBeSelected' exists on object in board state
   selectCard(e) {
-    console.log('help me please');
+    //console.log('help me please');
     console.log(e.target);
   }
 
@@ -258,7 +263,7 @@ class App extends Component {
           <Board
             score={this.state.score}
             board={this.state.board}
-            onSelectCard={e => this.selectCard(e)}
+            onSelectCard={this.selectCard}
           />
           <CardHolder
             player="p2"

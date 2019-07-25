@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { DropTarget } from 'react-dnd';
 
 const targetSource = {
@@ -48,6 +48,26 @@ function BoardSpace(props) {
   if (hovered) {
     console.log('hovering over ' + x + '-' + y);
   }
+
+  // function useTraceUpdate(props) {
+  //   const prev = useRef(props);
+  //   useEffect(() => {
+  //     const changedProps = Object.entries(props).reduce(
+  //       (ps, [k, v]) => {
+  //         if (prev.current[k] !== v) {
+  //           ps[k] = [prev.current[k], v];
+  //         }
+  //         return ps;
+  //       },
+  //       {}
+  //     );
+  //     if (Object.keys(changedProps).length > 0) {
+  //       console.log(x + '-' + y, 'Changed props:', changedProps);
+  //     }
+  //     prev.current = props;
+  //   });
+  // }
+  // useTraceUpdate(props);
 
   return connectDropTarget(
     <div
